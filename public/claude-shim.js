@@ -107,6 +107,13 @@
     return null;
   }
   window.claude = { use };
+  window.lookupMovieDetails = async (title, year) => {
+    const params = new URLSearchParams({ title });
+    if (year) params.set("year", year);
+    const response = await fetch("/api/movie-details?" + params, { headers: authHeaders() });
+    if (!response.ok) throw new Error("Movie lookup failed");
+    return response.json();
+  };
 
   /* ---------- owner sign-in ---------- */
   document.addEventListener("DOMContentLoaded", async () => {

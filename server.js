@@ -4,6 +4,7 @@
 // Storage: Postgres when DATABASE_URL is set (Railway), otherwise a local data.json file.
 
 const express = require("express");
+const { lookupMovie } = require("./movie-lookup");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
@@ -105,6 +106,25 @@ app.disable("x-powered-by");
 app.use(express.json({ limit: "64kb" }));
 
 app.get("/api/whoami", (req, res) => res.json({ owner: isOwner(req), canFill: isOwner(req) && !!ANTHROPIC_API_KEY, ownerConfigured: !!ADMIN_PASSWORD }));
+
+app.get(["/api/movie-details", "/api/movie-poster"], async (req, res, next) => {
+  const title = typeof req.query.title === "string" ? req.query.title.trim() : "";
+  const year = req.query.year === undefined ? null : Number(req.query.year);
+  if (!title || title.length > 200 || (year !== null && (!Number.isInteger(year) || year < 1880 || year > 2100))) {
+    return res.status(400).json({ error: "Enter a film title and a valid release year." });
+  }
+  try {
+    // Use the owner's optional OMDb quota only for signed-in database edits.
+    const key = isOwner(req) ? process.env.OMDB_API_KEY : null;
+    const result = await lookupMovie(title, year, key);
+    if (req.path === "/api/movie-poster") {
+      res.set("Cache-Control", result.data?.posterUrl ? "public, max-age=86400" : "public, max-age=60");
+      if (result.data?.posterUrl) return res.redirect(result.data.posterUrl);
+      return res.sendStatus(404);
+    }
+    res.set("Cache-Control", "private, no-store").json(result);
+  } catch (error) { next(error); }
+});
 
 app.get("/api/state", async (req, res, next) => {
   try { res.set("Cache-Control", "no-store"); res.json(await store.all()); } catch (e) { next(e); }
