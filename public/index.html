@@ -84,9 +84,6 @@ h1 em { font-style: normal; color: var(--berry); }
 .stats { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--f-mono); font-size: 0.85rem; font-variant-numeric: tabular-nums; color: var(--muted); }
 .stats strong { color: var(--ink); font-weight: 500; }
 .stats .behind { color: var(--berry); }
-.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-.tabs a { text-decoration: none; color: var(--ink); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); }
-.tabs a[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .cane { height: 8px; margin-top: 18px; background: repeating-linear-gradient(-45deg, var(--berry-fill) 0 8px, var(--ink) 8px 16px); opacity: .9; }
 main.wrap { padding-block: 24px 56px; }
 
@@ -391,6 +388,103 @@ textarea.input { resize: vertical; min-height: 84px; line-height: 1.45; }
 #ownerBox summary { cursor: pointer; }
 #ownerBox { margin-top: 18px; }
 img { max-width: 100%; }
+
+/* ===== App shell, cards and phone layout ===== */
+:root { --tabbar-h: 58px; --radius: 16px; }
+body { -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 40; background: var(--bg-deep); }
+.mast-inner { padding-block: 2px 18px; gap: 10px; }
+h1 { font-size: clamp(2rem, 6.5vw, 3.4rem); }
+.stats { gap: 8px; }
+.stats > span { background: rgba(255,255,255,.06); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+.stats > .behind { background: rgba(255,107,115,.12); border-color: rgba(255,107,115,.4); }
+.cane { margin-top: 0; height: 6px; }
+
+.tabbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(9, 40, 30, .86); -webkit-backdrop-filter: saturate(150%) blur(14px); backdrop-filter: saturate(150%) blur(14px); border-bottom: 1px solid rgba(255,255,255,.07); }
+.tabbar-in { max-width: 780px; height: var(--tabbar-h); margin: 0 auto; display: flex; align-items: center; gap: 6px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.tabbar a { flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: var(--muted); font-weight: 600; font-size: .92rem; padding: 9px 10px; border-radius: 12px; transition: background-color .15s, color .15s; white-space: nowrap; }
+.tabbar a svg { width: 18px; height: 18px; flex: none; }
+.tabbar a:hover { color: var(--ink); background: rgba(255,255,255,.05); }
+.tabbar a[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+
+main.wrap { padding-block: 22px 64px; }
+.panel { border-radius: var(--radius); }
+.btn { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; }
+.btn.small { min-height: 32px; }
+.input { min-height: 42px; }
+.rules { font-size: .9rem; }
+
+.week { margin-top: 26px; }
+.week h3 { position: sticky; top: calc(var(--tabbar-h) + env(safe-area-inset-top, 0px)); z-index: 5; margin: 0 0 8px; padding: 10px 2px 8px; background: rgba(14, 58, 44, .92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.days { gap: 12px; }
+.day { position: relative; border-radius: var(--radius); box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 8px 22px rgba(0,0,0,.18); scroll-margin-top: calc(var(--tabbar-h) + 52px); }
+.content { padding: 16px 18px; gap: 12px; }
+.film { grid-template-columns: 22px 64px minmax(0, 1fr); column-gap: 14px; }
+.film > .cover { width: 64px; border-radius: 6px; }
+.film .body { gap: 6px; }
+.titlebtn { font-size: 1.08rem; }
+.yourrow { padding-top: 4px; }
+.editnight { min-height: 32px; padding: 4px 12px; background: rgba(255,255,255,.04); }
+
+.tonight { background: linear-gradient(160deg, #1B5C47, var(--surface) 70%); border-color: rgba(247,198,79,.35); box-shadow: 0 12px 30px rgba(0,0,0,.25); }
+.tonight .film { background: rgba(0,0,0,.2); grid-template-columns: 22px 92px minmax(0, 1fr); }
+.tonight .film > .cover { width: 92px; }
+
+.dbrow { padding: 14px 0; }
+
+@media (max-width: 640px) {
+  :root { --tabbar-h: 64px; }
+  .tabbar { position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-bottom: 0; border-top: 1px solid rgba(255,255,255,.09); background: rgba(7, 33, 25, .94); }
+  .tabbar-in { height: auto; gap: 4px; padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+  .tabbar a { flex-direction: column; gap: 3px; font-size: .7rem; padding: 7px 2px; border-radius: 12px; }
+  .tabbar a svg { width: 22px; height: 22px; }
+  .tabbar a[aria-selected="true"] { background: rgba(247,198,79,.14); color: var(--gold); }
+  body { padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
+  .mast-inner { padding-block: 0 14px; gap: 8px; }
+  h1 { font-size: 2.15rem; }
+  .eyebrow { font-size: .68rem; }
+  .stats { font-size: .76rem; gap: 6px; }
+  .stats > span { padding: 3px 10px; }
+  main.wrap { padding-block: 16px 40px; }
+  .week h3 { top: env(safe-area-inset-top, 0px); }
+  .day { grid-template-columns: 1fr; scroll-margin-top: 52px; }
+  .date { flex-direction: row; align-items: baseline; gap: 7px; padding: 10px 14px; min-height: 48px; border-right: 0; border-bottom: 2px dashed var(--line); }
+  .date .num { font-size: 1.3rem; }
+  .day.today .date { border-bottom-color: rgba(42,30,0,.3); }
+  .day-head { min-height: 32px; }
+  .open-night { white-space: nowrap; }
+  .content { padding: 14px; }
+  .film { grid-template-columns: 76px minmax(0, 1fr); column-gap: 12px; }
+  .film > .cover { grid-column: 1; grid-row: 1; width: 76px; }
+  .film > .watch { grid-column: 1; grid-row: 2; justify-self: center; margin-top: 10px; width: 30px; height: 30px; border-radius: 8px; }
+  .film > .body { grid-column: 2; grid-row: 1 / span 2; }
+  .film.ro { grid-template-columns: 56px minmax(0, 1fr); }
+  .film.ro > .cover { width: 56px; }
+  .tonight .film { grid-template-columns: 92px minmax(0, 1fr); padding: 12px; }
+  .tonight .film > .cover { width: 92px; }
+  .titlebtn { font-size: 1.02rem; }
+  .syn { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: .9rem; }
+  .cast { font-size: .8rem; }
+  .yourrow { gap: 8px 14px; }
+  .st { width: 24px; height: 24px; }
+  .st .fill svg { width: 24px; height: 24px; }
+  .seen input { width: 20px; height: 20px; }
+  .tonight .row2 { flex-direction: column; align-items: stretch; }
+  .tonight .row2 .btn { width: 100%; }
+  .tonight .row2 .linkish { align-self: center; }
+  .db-tools { flex-direction: column; align-items: stretch; }
+  .db-tools .input, .db-tools select.input { width: 100%; flex: none; }
+  .dblist { border-top: 0; display: grid; gap: 10px; }
+  .dbrow { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+  .pickbar .btn { flex: 1 1 auto; }
+  .pickbar .field.count { width: 100%; }
+  .build-bar { bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 8px); }
+  .build-bar .btn { width: 100%; }
+  .sheet { max-height: 94%; }
+  .ns-row { grid-template-columns: 44px minmax(0, 1fr); }
+  .ns-btns { grid-column: 1 / -1; justify-content: stretch; }
+  .ns-btns .btn { flex: 1 1 0; }
+}
 </style>
 <script src="/claude-shim.js"></script>
 </head>
@@ -401,14 +495,17 @@ img { max-width: 100%; }
     <p class="eyebrow" id="eyebrow">Christmas movies, one night at a time</p>
     <h1>Christmas Movie <em>Countdown</em></h1>
     <div class="stats" id="stats"><span>Loading…</span></div>
-    <nav class="tabs" role="tablist" aria-label="Views">
-      <a href="#schedule" role="tab" id="tab-schedule" aria-selected="true" aria-controls="view-schedule">Schedule</a>
-      <a href="#database" role="tab" id="tab-database" aria-selected="false" aria-controls="view-database">My movies</a>
-      <a href="#build" role="tab" id="tab-build" aria-selected="false" aria-controls="view-build">Make a list</a>
-    </nav>
   </div>
   <div class="cane" aria-hidden="true"></div>
 </header>
+
+<nav class="tabbar" aria-label="Views">
+  <div class="tabbar-in" role="tablist">
+    <a href="#schedule" role="tab" id="tab-schedule" aria-selected="true" aria-controls="view-schedule"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="tl">Schedule</span></a>
+    <a href="#database" role="tab" id="tab-database" aria-selected="false" aria-controls="view-database"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 8h16M4 16h16M8 3.5v17M16 3.5v17" stroke="currentColor" stroke-width="1.6"/></svg><span class="tl">My movies</span></a>
+    <a href="#build" role="tab" id="tab-build" aria-selected="false" aria-controls="view-build"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.3 5 5.2.6-3.9 3.6 1.1 5.2L12 15.3l-4.7 2.6 1.1-5.2-3.9-3.6 5.2-.6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="tl">Make a list</span></a>
+  </div>
+</nav>
 
 <main class="wrap">
   <section id="view-schedule" role="tabpanel" aria-labelledby="tab-schedule">
@@ -764,17 +861,18 @@ function renderLights() {
   const W = Math.max(280, $("lightsWrap").clientWidth || 360);
   const list = lightsSource();
   const N = list.length;
-  const per = Math.max(8, Math.floor((W - 24) / 25));
+  const narrow = W < 560, gapX = narrow ? 17 : 25, scale = narrow ? 0.74 : 1;
+  const per = Math.max(8, Math.floor((W - 24) / gapX));
   const rows = Math.max(1, Math.ceil(N / per));
   const perRow = Math.max(1, Math.ceil(N / rows));
-  const rowH = 46, top = 10, H = top + rows * rowH + 14;
+  const rowH = narrow ? 34 : 46, top = narrow ? 8 : 10, H = top + rows * rowH + (narrow ? 10 : 14);
   svg.setAttribute("viewBox", "0 0 " + W + " " + H);
   svg.setAttribute("height", H);
   const NS = "http://www.w3.org/2000/svg";
   svg.textContent = "";
   let idx = 0;
   for (let r = 0; r < rows; r++) {
-    const y0 = top + r * rowH, sag = 22, x0 = -6, x2 = W + 6, cx = W / 2, cy = y0 + sag * 2;
+    const y0 = top + r * rowH, sag = narrow ? 15 : 22, x0 = -6, x2 = W + 6, cx = W / 2, cy = y0 + sag * 2;
     const path = document.createElementNS(NS, "path");
     path.setAttribute("class", "wire"); path.setAttribute("d", `M${x0},${y0} Q${cx},${cy} ${x2},${y0}`);
     svg.append(path);
@@ -787,7 +885,7 @@ function renderLights() {
       const dx = 2 * (1 - t) * (cx - x0) + 2 * t * (x2 - cx), dy = 2 * (1 - t) * (cy - y0) + 2 * t * (y0 - cy);
       const g = document.createElementNS(NS, "g");
       g.setAttribute("class", "bulb" + (b.on ? " on" : ""));
-      g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${(Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1)})`);
+      g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${(Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1)}) scale(${scale})`);
       g.style.setProperty("--c", BULB_COLORS[idx % 5]);
       g.style.setProperty("--d", (-(idx * 0.41) % 3.4).toFixed(2) + "s");
       g.dataset.action = "open"; g.dataset.id = b.id; g.dataset.from = b.from;
@@ -811,7 +909,7 @@ function renderLights() {
 const hasList = () => L.loaded && (L.kind === "owner" || (L.kind === "personal" && P));
 function renderStats() {
   const box = $("stats"); box.textContent = "";
-  $("tab-database").textContent = ctx.role === "owner" ? "Database" : "My movies";
+  $("tab-database").querySelector(".tl").textContent = ctx.role === "owner" ? "Database" : "My movies";
   $("dbTitle").textContent = ctx.role === "owner" ? "Database" : "My movies";
   if (ctx.role === "pending") { box.append(el("span", null, "Loading…")); return; }
   if (!hasList()) {
