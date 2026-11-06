@@ -1,0 +1,1735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Christmas Movie Countdown</title>
+<meta name="description" content="A nightly Christmas movie countdown from November 1 to Christmas Day.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3l11 24H5z' fill='%231E7A4E'/%3E%3Ccircle cx='16' cy='4' r='3' fill='%23F7C64F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Anton&family=Oswald:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one evergreen column. A swag of string lights (one bulb per movie on the list, lit once watched) hangs over the masthead, then three tabs: the nightly Schedule, the movie list, and a builder for making your own countdown. Details open in a sheet. */
+:root {
+  --bg: #0E3A2C;
+  --bg-deep: #0A2C21;
+  --surface: #134637;
+  --surface-2: #19523F;
+  --line: #2A6451;
+  --ink: #F7F2E6;
+  --ink-2: #DCE7DF;
+  --muted: #A9C6B7;
+  --berry: #FF6B73;
+  --berry-fill: #D3263A;
+  --gold: #F7C64F;
+  --ok: #7FDB9C;
+  --wire: #06190F;
+  --bulb-off: #2C5A49;
+  --star-off: #4C7F6B;
+  --b1: #FF5A63; --b2: #FFC94A; --b3: #62C6F2; --b4: #F792C0; --b5: #FFF1C9;
+  --f-display: "Limelight", Georgia, "Times New Roman", serif;
+  --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --f-vhs: "Anton", Impact, "Arial Narrow", sans-serif;
+  --f-billing: "Oswald", "Arial Narrow", sans-serif;
+  --tape: #121212;
+  --tape-2: #1C1C1C;
+  --tape-ink: #F1EDE4;
+  --tape-muted: #A8A39A;
+  --fresh: #F25A3C;
+  --rotten: #8DBF3F;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg-deep); }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(120% 60% at 50% 0%, #15503D 0%, var(--bg) 60%);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  min-height: 100%;
+  margin: 0;
+}
+.wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Masthead + lights */
+.lights-wrap { width: 100%; overflow: hidden; }
+#lights { display: block; width: 100%; }
+#lights .wire { fill: none; stroke: var(--wire); stroke-width: 2.4; stroke-linecap: round; }
+#lights .cap { fill: #3E4A42; }
+#lights .glass { fill: var(--bulb-off); stroke: #3B6E5B; stroke-width: 0.8; transition: fill .4s; }
+#lights .bulb { cursor: pointer; }
+#lights .bulb.on .glass { fill: var(--c); stroke: none; filter: drop-shadow(0 0 3px var(--c)) drop-shadow(0 0 9px var(--c)); }
+@media (prefers-reduced-motion: no-preference) {
+  #lights .bulb.on .glass { animation: twinkle 3.4s ease-in-out infinite; animation-delay: var(--d); }
+  @keyframes twinkle { 50% { filter: drop-shadow(0 0 2px var(--c)); opacity: .82; } }
+}
+.mast-inner { padding-block: 6px 0; display: grid; gap: 12px; }
+.eyebrow { margin: 0; font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 8vw, 3.9rem); line-height: 1.02; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--berry); }
+.stats { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--f-mono); font-size: 0.85rem; font-variant-numeric: tabular-nums; color: var(--muted); }
+.stats strong { color: var(--ink); font-weight: 500; }
+.stats .behind { color: var(--berry); }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tabs a { text-decoration: none; color: var(--ink); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); }
+.tabs a[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.cane { height: 8px; margin-top: 18px; background: repeating-linear-gradient(-45deg, var(--berry-fill) 0 8px, var(--ink) 8px 16px); opacity: .9; }
+main.wrap { padding-block: 24px 56px; }
+
+/* Panels */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 12px; }
+.panel + .panel { margin-top: 16px; }
+.panel h3 { margin: 0; font-size: 1.05rem; }
+.empty-state { text-align: left; }
+.empty-state h2 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 1.8rem; color: var(--gold); }
+.empty-state p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+
+/* Tonight */
+.tonight-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+.tonight h2 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 1.75rem; line-height: 1.1; color: var(--gold); }
+.when { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.tonight .titlebtn { font-size: 1.15rem; }
+.linkish { justify-self: start; background: none; border: 0; padding: 0; cursor: pointer; color: var(--gold); font-weight: 600; font-size: 0.9rem; text-decoration: underline; text-underline-offset: 3px; }
+.rules { margin: 22px 0 0; color: var(--muted); font-size: 0.95rem; max-width: 64ch; }
+
+/* Schedule: each night is a ticket-style card; the date sits in a stub on the left */
+.week { margin-top: 32px; }
+.week h3 { margin: 0 0 10px; font-family: var(--f-mono); font-weight: 500; font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.week h3 span:first-child { color: var(--gold); }
+.days { display: grid; gap: 10px; }
+.day { display: grid; grid-template-columns: 78px 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; scroll-margin-top: 16px; }
+.date { font-family: var(--f-mono); font-variant-numeric: tabular-nums; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 2px; padding: 16px 6px; background: var(--bg-deep); border-right: 2px dashed var(--line); text-align: center; }
+.date .dow { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.date .num { font-size: 1.7rem; font-weight: 500; line-height: 1.05; color: var(--ink); }
+.date .mon { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--berry); }
+.day.sat .dow { color: var(--gold); }
+.day.past:not(.today) { opacity: .7; }
+.day.today { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), 0 8px 28px rgba(247,198,79,.12); }
+.day.today .date { background: var(--gold); border-right-color: rgba(42,30,0,.35); }
+.day.today .date .dow, .day.today .date .num, .day.today .date .mon { color: #2A1E00; }
+.content { min-width: 0; display: grid; gap: 10px; align-content: start; padding: 14px 16px; }
+.open-night { color: var(--muted); font-size: 0.9rem; font-style: italic; }
+
+.films { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.films > li + li { border-top: 1px dashed var(--line); padding-top: 12px; }
+.film { display: grid; grid-template-columns: 22px 58px minmax(0, 1fr); column-gap: 12px; align-items: start; }
+.film.ro { grid-template-columns: 58px minmax(0, 1fr); }
+.day-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 22px; }
+.day-head:empty { display: none; }
+.editnight { margin-left: auto; background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 3px 11px; font-size: 0.78rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.editnight:hover { color: var(--ink); border-color: var(--muted); }
+.rt { display: inline-flex; align-items: center; gap: 5px; font-family: var(--f-mono); font-size: 0.72rem; font-weight: 500; padding: 1px 7px 1px 5px; border-radius: 999px; background: rgba(242,90,60,.16); color: #FF8A70; white-space: nowrap; }
+.rt::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--fresh); }
+.rt.rotten { background: rgba(141,191,63,.16); color: #B5DB7A; }
+.rt.rotten::before { background: var(--rotten); border-radius: 2px 50% 2px 50%; }
+.rt.none { background: rgba(255,255,255,.06); color: var(--muted); }
+.rt.none::before { background: var(--muted); opacity: .5; }
+.yourrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin-top: 2px; }
+.seen { display: inline-flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--muted); cursor: pointer; user-select: none; }
+.seen input { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; margin: 0; border: 1.5px solid var(--muted); border-radius: 4px; display: grid; place-content: center; cursor: pointer; }
+.seen input::after { content: ""; width: 8px; height: 4px; border-left: 2px solid var(--bg); border-bottom: 2px solid var(--bg); transform: translateY(-1px) rotate(-45deg); opacity: 0; }
+.seen input:checked { background: var(--b3); border-color: var(--b3); }
+.seen input:checked::after { opacity: 1; }
+.seen input:checked + span { color: var(--b3); }
+
+/* Generated cover art (or an uploaded poster) */
+.cover { position: relative; width: 58px; aspect-ratio: 2 / 3; max-width: 100%; border-radius: 4px; overflow: hidden; background: linear-gradient(160deg, var(--c1), var(--c2)); box-shadow: 0 3px 10px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.08); color: var(--c3); cursor: pointer; flex: none; }
+.cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cover .cv-band { position: absolute; left: 0; right: 0; top: 10%; height: 6%; background: var(--c3); opacity: .85; }
+.cover .cv-band.b2 { top: 19%; height: 2.5%; opacity: .6; }
+.cover .cv-title { position: absolute; left: 8%; right: 8%; bottom: 16%; max-height: 62%; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; font-family: var(--f-vhs); text-transform: uppercase; line-height: 1; font-size: 8px; color: var(--c3); overflow-wrap: break-word; hyphens: auto; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
+.pick-row .cover .cv-title, .ns-row .cover .cv-title { font-size: 5.5px; }
+.pick-row .cover .cv-year, .ns-row .cover .cv-year { display: none; }
+.cover .cv-year { position: absolute; left: 8%; bottom: 6%; font-family: var(--f-billing); font-size: 6px; letter-spacing: .12em; color: var(--c3); opacity: .8; }
+.cover.lg { width: 100%; border-radius: 6px; }
+.cover.lg .cv-title { font-size: clamp(15px, 4.6vw, 22px); }
+.cover.lg .cv-year { font-size: 11px; }
+.film.ro .cover { cursor: default; }
+.film .body { min-width: 0; display: grid; gap: 5px; }
+.title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; }
+.titlebtn { background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: pointer; font-weight: 700; font-size: 1.06rem; line-height: 1.3; color: var(--ink); overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s; }
+.titlebtn:hover { text-decoration-color: var(--gold); }
+.film.done .titlebtn { color: var(--muted); }
+.meta { font-family: var(--f-mono); font-size: 0.76rem; color: var(--gold); font-variant-numeric: tabular-nums; }
+.rating-badge { display: inline-block; border: 1px solid currentColor; border-radius: 4px; padding: 0 5px; font-size: 0.66rem; line-height: 1.5; margin-left: 2px; font-family: var(--f-mono); color: #8FD3B0; letter-spacing: 0.04em; }
+.syn { margin: 0; font-size: 0.93rem; line-height: 1.55; color: #C9DCD1; max-width: 64ch; }
+.cast { margin: 0; font-size: 0.84rem; color: var(--ink-2); padding-top: 6px; border-top: 1px solid rgba(255,255,255,.06); }
+.cast b { font-weight: 500; color: var(--berry); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; font-family: var(--f-mono); margin-right: 8px; }
+.film.done .syn, .film.done .cast { color: var(--muted); }
+.tonight .film { background: var(--bg-deep); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+
+input[type="checkbox"].watch { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; margin: 0; border: 1.5px solid var(--muted); border-radius: 6px; background: transparent; display: grid; place-content: center; cursor: pointer; }
+input[type="checkbox"].watch::after { content: ""; width: 11px; height: 6px; border-left: 2.2px solid var(--bg); border-bottom: 2.2px solid var(--bg); transform: translateY(-1px) rotate(-45deg); opacity: 0; }
+input[type="checkbox"].watch:checked { background: var(--ok); border-color: var(--ok); }
+input[type="checkbox"].watch:checked::after { opacity: 1; }
+input[type="checkbox"].watch:disabled { cursor: default; opacity: .55; }
+
+.chip { font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; background: rgba(255,107,115,.16); color: var(--berry); }
+.tag { justify-self: start; font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); background: rgba(247,198,79,.14); padding: 2px 8px; border-radius: 4px; }
+
+/* Half-star rating slider */
+.stars { display: inline-flex; align-items: center; gap: 8px; justify-self: start; border-radius: 6px; }
+.st-row { display: inline-flex; gap: 2px; cursor: pointer; touch-action: manipulation; }
+.st { position: relative; width: 20px; height: 20px; color: var(--star-off); flex: none; }
+.st > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.st .fill { position: absolute; top: 0; left: 0; bottom: 0; width: var(--f, 0%); overflow: hidden; color: var(--gold); }
+.st .fill svg { display: block; width: 20px; height: 20px; }
+.stars.lg .st { width: 34px; height: 34px; }
+.stars.lg .st .fill svg { width: 34px; height: 34px; }
+.st-val { font-family: var(--f-mono); font-size: 0.76rem; color: var(--muted); min-width: 2.4em; font-variant-numeric: tabular-nums; }
+.stars[aria-disabled="true"] .st-row { cursor: default; }
+
+/* Forms */
+.fields { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, .8fr) minmax(0, 1.4fr); gap: 10px; }
+.fields3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.field { display: grid; gap: 4px; min-width: 0; align-content: start; }
+.field label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+.input { width: 100%; background: var(--bg-deep); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; min-width: 0; }
+textarea.input { resize: vertical; min-height: 84px; line-height: 1.45; }
+.input:focus { border-color: var(--gold); outline: none; }
+.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; justify-content: space-between; }
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--muted); cursor: pointer; }
+.check input:not(.watch) { accent-color: var(--gold); width: 16px; height: 16px; margin: 0; }
+.btn { border: 0; border-radius: 999px; padding: 9px 18px; cursor: pointer; font-weight: 600; background: var(--berry-fill); color: #fff; white-space: nowrap; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.gold { background: var(--gold); color: #2A1E00; }
+.btn.small { padding: 5px 12px; font-size: 0.85rem; }
+.btn:disabled { opacity: .5; cursor: default; }
+.status { font-size: 0.88rem; color: var(--muted); min-height: 1.3em; margin: 0; }
+.hint { font-size: 0.86rem; color: var(--muted); margin: 0; }
+
+/* Database */
+.db-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 16px; }
+.db-head h2 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 1.9rem; }
+.db-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; align-items: center; }
+.db-tools .input { width: auto; flex: 1 1 220px; }
+.db-tools select.input { flex: 0 1 200px; }
+.db-count { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); margin: 12px 0 6px; }
+.dblist { border-top: 1px solid var(--line); }
+.dbrow { display: grid; grid-template-columns: 22px minmax(0, 1fr) 100px 170px 84px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.dbrow .dbmain { min-width: 0; display: grid; gap: 2px; }
+.dbstars { display: grid; gap: 4px; }
+.dbnight { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); }
+.dbnight.none { color: var(--berry); }
+.dbact { justify-self: end; }
+.removebtn { background: none; border: 1px solid transparent; color: var(--muted); border-radius: 8px; padding: 4px 8px; cursor: pointer; font-size: 0.85rem; }
+.removebtn:hover { color: var(--berry); border-color: var(--line); }
+.confirm { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 0.9rem; background: rgba(211,38,58,.14); border-radius: 10px; padding: 8px 12px; }
+.empty { color: var(--muted); padding: 18px 0; }
+.drafted { font-size: 0.82rem; color: var(--gold); margin: 0; }
+
+/* Builder */
+.build-intro h2 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(1.8rem, 6vw, 2.4rem); line-height: 1.08; }
+.build-intro p { margin: 10px 0 0; color: var(--ink-2); max-width: 62ch; }
+.owner-note { background: rgba(247,198,79,.12); border: 1px solid rgba(247,198,79,.35); color: var(--ink); border-radius: 12px; padding: 10px 14px; font-size: 0.92rem; }
+.build-intro { margin-bottom: 18px; }
+.step-n { font-family: var(--f-mono); color: var(--gold); margin-right: 8px; font-weight: 500; }
+.capline { font-family: var(--f-mono); font-size: 0.82rem; color: var(--muted); margin: 0; }
+.capline strong { color: var(--ink); font-weight: 500; }
+.pickbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.pickbar .field.count { width: 110px; }
+.pickbar .grow { flex: 1 1 200px; }
+.catalog { border-top: 1px solid var(--line); }
+.cat-row { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.cat-row .body { min-width: 0; display: grid; gap: 3px; }
+.cat-row .syn { font-size: 0.88rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.svc-line { font-size: 0.8rem; color: var(--muted); margin: 0; }
+.cat-row.off .titlebtn { color: var(--ink-2); }
+.addown { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; }
+.addown .field { flex: 1 1 220px; }
+.build-bar {
+  position: sticky; bottom: 0; z-index: 20; margin-top: 18px;
+  background: var(--bg-deep); border: 1px solid var(--line); border-radius: 16px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.25);
+}
+.build-bar p { margin: 0; font-size: 0.92rem; }
+.build-bar .warn { color: var(--berry); }
+.preview { margin-top: 24px; }
+.preview h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; margin: 0 0 4px; color: var(--gold); }
+
+.note { margin: 28px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+/* Sheets */
+.sheet-back { position: fixed; inset: 0; z-index: 50; background: rgba(3, 12, 9, .72); display: flex; align-items: center; justify-content: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.sheet { position: relative; width: min(620px, 100%); max-height: 100%; overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.sheet-top { height: 8px; background: repeating-linear-gradient(-45deg, var(--berry-fill) 0 8px, var(--ink) 8px 16px); border-radius: 20px 20px 0 0; }
+.sheet-in { padding: 22px; display: grid; gap: 16px; }
+.sheet-h { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.sheet h2 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2.1rem); line-height: 1.08; text-wrap: balance; overflow-wrap: anywhere; }
+.closebtn { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-deep); cursor: pointer; font-size: 1.2rem; line-height: 1; color: var(--ink); }
+.fine { font-size: 0.82rem; color: var(--muted); margin: 0; }
+.row2 { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.edit-grid .full { grid-column: 1 / -1; }
+.sheet-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Night editor */
+.ns-sub { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.ns-list { display: grid; gap: 8px; }
+.ns-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center; background: var(--bg-deep); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+.ns-row .cover { width: 44px; }
+.ns-row .t { font-weight: 700; overflow-wrap: anywhere; }
+.ns-row .s { font-size: 0.8rem; color: var(--muted); }
+.ns-btns { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.ns-empty { border: 1px dashed var(--line); border-radius: 12px; padding: 16px; color: var(--muted); text-align: center; }
+.picker { display: grid; gap: 10px; padding-top: 12px; border-top: 1px solid var(--line); }
+.picker h3 { margin: 0; font-size: 1rem; }
+.pick-list { display: grid; gap: 4px; max-height: 46vh; overflow-y: auto; padding-right: 4px; }
+.pick-group { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 10px 0 2px; }
+.pick-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%; text-align: left; background: transparent; border: 1px solid transparent; border-radius: 10px; padding: 6px 8px; cursor: pointer; color: var(--ink); }
+.pick-row:hover, .pick-row:focus-visible { background: var(--surface-2); border-color: var(--line); }
+.pick-row .cover { width: 34px; cursor: pointer; }
+.pick-row .t { font-weight: 600; overflow-wrap: anywhere; }
+.pick-row .w { font-family: var(--f-mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+
+/* Movie details: the back of a VHS box */
+.sheet.vhs { background: var(--tape); border: 0; border-radius: 6px; box-shadow: 0 0 0 1px #000, 0 30px 80px rgba(0,0,0,.6); color: var(--tape-ink); width: min(640px, 100%);
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 2px, transparent 2px 4px); }
+.vhs-top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: linear-gradient(100deg, #D3263A 0 28%, #F7C64F 28% 34%, #1E7A4E 34% 62%, #F7C64F 62% 66%, #D3263A 66% 100%); }
+.vhs-logo { font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .06em; color: #fff; background: #000; padding: 2px 9px 1px; border-radius: 3px; line-height: 1.2; }
+.vhs-cat { font-family: var(--f-billing); font-size: 0.78rem; letter-spacing: .18em; color: #000; background: rgba(255,255,255,.82); padding: 2px 8px; border-radius: 2px; }
+.vhs-top .closebtn { margin-left: auto; background: #000; border-color: #000; color: #fff; }
+.vhs-body { padding: 22px 22px 18px; display: grid; gap: 18px; }
+.vhs-title { margin: 0; font-family: var(--f-vhs) !important; font-weight: 400; text-transform: uppercase; font-size: clamp(2rem, 8vw, 3.1rem) !important; line-height: .95 !important; letter-spacing: .01em; color: var(--gold); text-shadow: 3px 3px 0 #B02030, 6px 6px 0 rgba(0,0,0,.6); overflow-wrap: anywhere; }
+.vhs-tagline { margin: -8px 0 0; font-family: var(--f-billing); text-transform: uppercase; letter-spacing: .2em; font-size: 0.78rem; color: var(--tape-muted); }
+.vhs-grid { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 18px; align-items: start; }
+.vhs-cover { display: grid; gap: 8px; }
+.vhs-blurb { display: grid; gap: 14px; min-width: 0; }
+.vhs-syn { margin: 0; font-size: 1.04rem; line-height: 1.6; color: var(--tape-ink); }
+.vhs-syn::first-letter { font-family: var(--f-vhs); font-size: 2.3em; float: left; line-height: .9; margin: 4px 6px 0 0; color: var(--gold); }
+.critics { display: flex; align-items: center; gap: 12px; border: 2px solid var(--tape-ink); padding: 10px 12px; }
+.critics .pct { font-family: var(--f-vhs); font-size: 2.3rem; line-height: 1; color: var(--fresh); }
+.critics.rotten .pct { color: var(--rotten); }
+.critics.none .pct { color: var(--tape-muted); font-size: 1.4rem; }
+.critics .lab { font-family: var(--f-billing); text-transform: uppercase; letter-spacing: .1em; font-size: 0.74rem; line-height: 1.3; color: var(--tape-muted); }
+.critics .lab b { display: block; color: var(--tape-ink); font-weight: 600; font-size: 0.86rem; letter-spacing: .08em; }
+.critics a { color: var(--tape-muted); }
+.sticker { background: var(--gold); color: #231A00; border-radius: 8px; padding: 14px 16px 16px; transform: rotate(-1deg); box-shadow: 0 6px 16px rgba(0,0,0,.4); display: grid; gap: 10px;
+  --star-off: rgba(35,26,0,.25); --muted: #4A3B0E; --line: rgba(35,26,0,.25); --bg-deep: #FFE7A3; --ink: #231A00; --bg: #F7C64F; --ok: #1E7A4E; --b3: #1F5F8B; }
+.sticker .st .fill { color: #B02030; }
+.sticker-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-family: var(--f-billing); text-transform: uppercase; letter-spacing: .14em; font-size: 0.78rem; font-weight: 600; }
+.sticker-h span:last-child { font-size: 0.7rem; letter-spacing: .1em; opacity: .75; }
+.sticker .check { color: #231A00; font-weight: 600; }
+.sticker .seen { color: #231A00; font-weight: 600; }
+.sticker .field label { color: #4A3B0E; }
+.sticker select.input { background: #FFF3CC; color: #231A00; border-color: rgba(35,26,0,.3); color-scheme: light; }
+.sticker .linkish { color: #7A1420; }
+.avail { display: grid; gap: 8px; }
+.avail h3, .billing-h { margin: 0; font-family: var(--f-billing); font-weight: 600; text-transform: uppercase; letter-spacing: .2em; font-size: 0.76rem; color: var(--gold); }
+.svc-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.svc-label { font-size: 0.8rem; color: var(--tape-muted); margin-right: 4px; }
+.svc { font-family: var(--f-billing); text-transform: uppercase; letter-spacing: .06em; font-size: 0.84rem; font-weight: 500; padding: 3px 10px; border: 1px solid var(--tape-ink); color: var(--tape-ink); }
+.svc.free { border-style: dashed; }
+.avail .fine, .vhs .fine { color: var(--tape-muted); }
+.vhs a { color: var(--gold); }
+.billing { margin: 0; font-family: var(--f-billing); text-transform: uppercase; font-size: 0.86rem; line-height: 1.5; letter-spacing: .04em; color: var(--tape-muted); text-align: center; border-top: 1px solid #333; padding-top: 14px; }
+.billing b { color: var(--tape-ink); font-weight: 500; }
+.billing small { font-size: 0.72em; letter-spacing: .12em; margin-right: 4px; }
+.vhs-foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; }
+.mpaa { display: grid; grid-template-columns: auto 1fr; align-items: center; border: 2px solid var(--tape-ink); min-width: 0; max-width: 300px; }
+.mpaa b { font-family: var(--f-vhs); font-weight: 400; font-size: 1.9rem; line-height: 1; padding: 6px 12px; border-right: 2px solid var(--tape-ink); }
+.mpaa span { font-family: var(--f-billing); text-transform: uppercase; letter-spacing: .08em; font-size: 0.66rem; line-height: 1.3; padding: 4px 10px; color: var(--tape-muted); }
+.specs { font-family: var(--f-billing); text-transform: uppercase; letter-spacing: .14em; font-size: 0.78rem; color: var(--tape-muted); display: grid; gap: 2px; text-align: center; }
+.specs b { color: var(--tape-ink); font-weight: 500; }
+.barcode { background: #fff; padding: 6px 8px 3px; display: grid; justify-items: center; gap: 1px; }
+.barcode svg { display: block; width: 116px; height: 38px; }
+.barcode span { font-family: var(--f-mono); font-size: 0.6rem; color: #000; letter-spacing: .14em; }
+.vhs-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; border-top: 1px dashed #333; }
+.vhs .btn.ghost { color: var(--tape-ink); border-color: #444; }
+.drafted { font-size: 0.82rem; color: var(--gold); margin: 0; }
+.vhs .edit-grid .field label { color: var(--tape-muted); }
+.vhs .input { background: #000; border-color: #444; }
+.posterline { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+@media (max-width: 640px) {
+  .fields, .fields3 { grid-template-columns: 1fr 1fr; }
+  .fields .field:first-child { grid-column: 1 / -1; }
+  .fields3 .field:first-child { grid-column: 1 / -1; }
+  .dbrow { grid-template-columns: 22px minmax(0, 1fr) auto; row-gap: 6px; }
+  .dbrow .dbnight, .dbrow .dbstars { grid-column: 2; }
+  .dbrow .dbact { grid-column: 3; grid-row: 1; }
+  .sheet-back { align-items: flex-end; padding-bottom: 0; }
+  .sheet { border-radius: 20px 20px 0 0; max-height: 92%; padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .sheet.vhs { border-radius: 8px 8px 0 0; }
+  .edit-grid { grid-template-columns: 1fr; }
+  .vhs-grid { grid-template-columns: 120px minmax(0, 1fr); gap: 14px; }
+}
+@media (max-width: 420px) {
+  .day { grid-template-columns: 58px 1fr; }
+  .film { grid-template-columns: 22px 44px minmax(0, 1fr); column-gap: 10px; }
+  .film.ro { grid-template-columns: 44px minmax(0, 1fr); }
+  .film .cover { width: 44px; }
+  .film .cover .cv-title { font-size: 7px; }
+  .vhs-grid { grid-template-columns: 1fr; }
+  .vhs-cover { width: 150px; }
+  .vhs-body { padding: 18px 16px; }
+  .date .num { font-size: 1.4rem; }
+  .content { padding: 12px 12px; }
+  .panel { padding: 16px; }
+  .sheet-in { padding: 18px; }
+}
+.owner-form { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; max-width: 360px; }
+.owner-form .input { flex: 1 1 180px; }
+#ownerBox summary { cursor: pointer; }
+#ownerBox { margin-top: 18px; }
+img { max-width: 100%; }
+</style>
+<script src="/claude-shim.js"></script>
+</head>
+<body>
+<header class="mast">
+  <div class="lights-wrap" id="lightsWrap"><svg id="lights" role="img" aria-label="String of lights, one bulb per movie on the list. Lit bulbs are movies you've watched."></svg></div>
+  <div class="wrap mast-inner">
+    <p class="eyebrow" id="eyebrow">Christmas movies, one night at a time</p>
+    <h1>Christmas Movie <em>Countdown</em></h1>
+    <div class="stats" id="stats"><span>Loading…</span></div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <a href="#schedule" role="tab" id="tab-schedule" aria-selected="true" aria-controls="view-schedule">Schedule</a>
+      <a href="#database" role="tab" id="tab-database" aria-selected="false" aria-controls="view-database">My movies</a>
+      <a href="#build" role="tab" id="tab-build" aria-selected="false" aria-controls="view-build">Make a list</a>
+    </nav>
+  </div>
+  <div class="cane" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+  <section id="view-schedule" role="tabpanel" aria-labelledby="tab-schedule">
+    <section class="panel tonight" id="tonight" aria-live="polite"><p class="fine">Loading tonight's movie…</p></section>
+    <p class="rules" id="rules"></p>
+    <div id="weeks"></div>
+    <section id="unscheduled" hidden></section>
+  </section>
+
+  <section id="view-database" role="tabpanel" aria-labelledby="tab-database" hidden>
+    <div class="db-head"><h2 id="dbTitle">My movies</h2></div>
+    <div id="dbEmpty" hidden></div>
+    <form class="panel" id="addForm" autocomplete="off">
+      <h3>Add a movie</h3>
+      <div class="fields">
+        <div class="field">
+          <label for="addTitle">Title</label>
+          <input class="input" id="addTitle" name="title" required placeholder="e.g. Home Alone" list="catalogTitles">
+          <datalist id="catalogTitles"></datalist>
+        </div>
+        <div class="field">
+          <label for="addYear">Year (optional)</label>
+          <input class="input" id="addYear" name="year" inputmode="numeric" placeholder="1990">
+        </div>
+        <div class="field">
+          <label for="addNight">Night</label>
+          <select class="input" id="addNight" name="night"></select>
+        </div>
+      </div>
+      <div class="form-foot">
+        <label class="check" id="autoWrap" hidden><input type="checkbox" id="addAuto" checked> Fill in year, cast, director, rating and synopsis with Claude</label>
+        <button class="btn" type="submit" id="addBtn">Add to list</button>
+      </div>
+      <p class="status" id="addStatus" role="status"></p>
+    </form>
+    <div class="db-tools">
+      <input class="input" id="dbSearch" type="search" placeholder="Search titles, cast, directors" aria-label="Search your movies">
+      <select class="input" id="dbSort" aria-label="Sort">
+        <option value="night">Schedule order</option>
+        <option value="title">Title A–Z</option>
+        <option value="year">Newest first</option>
+        <option value="stars">Your stars</option>
+      </select>
+    </div>
+    <p class="db-count" id="dbCount"></p>
+    <div class="dblist" id="dbList" role="list"></div>
+    <p class="hint" id="rebuildHint" hidden><button class="linkish" type="button" data-action="rebuild">Rebuild my schedule</button> to reshuffle the movies you haven't watched yet.</p>
+  </section>
+
+  <section id="view-build" role="tabpanel" aria-labelledby="tab-build" hidden>
+    <div class="build-intro">
+      <h2 id="buildTitle">Make your own countdown</h2>
+      <p>Pick your movies and how many nights you want, and you'll get a nightly schedule to Christmas. Holiday movies land on their holidays: Thanksgiving movies during Thanksgiving week, Hanukkah movies during Hanukkah, and the big classics on Christmas Eve and Christmas Day.</p>
+      <p class="owner-note" id="ownerNote" hidden>This is what people see when you share this page. Building here only shows you a preview; your own countdown stays exactly as it is.</p>
+    </div>
+
+    <section class="panel">
+      <h3><span class="step-n">1</span>Your nights</h3>
+      <div class="fields3">
+        <div class="field">
+          <label for="bStart">First night</label>
+          <input class="input" type="date" id="bStart" min="2026-11-01" max="2026-12-31">
+        </div>
+        <div class="field">
+          <label for="bEnd">Last night</label>
+          <select class="input" id="bEnd">
+            <option value="2026-12-24">Christmas Eve</option>
+            <option value="2026-12-25" selected>Christmas Day</option>
+            <option value="2026-12-31">New Year's Eve</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bDoubles">Double features</label>
+          <select class="input" id="bDoubles">
+            <option value="off">None, one a night</option>
+            <option value="sat" selected>Saturdays</option>
+            <option value="weekend">Fridays, Saturdays and Sundays</option>
+          </select>
+        </div>
+      </div>
+      <p class="capline" id="capLine"></p>
+    </section>
+
+    <section class="panel">
+      <h3><span class="step-n">2</span>Your movies</h3>
+      <div class="pickbar">
+        <div class="field count">
+          <label for="bCount">How many</label>
+          <input class="input" type="number" id="bCount" min="1" step="1" inputmode="numeric">
+        </div>
+        <button class="btn gold" type="button" id="bRandom">Pick at random</button>
+        <button class="btn ghost" type="button" id="bAll">Select all</button>
+        <button class="btn ghost" type="button" id="bClear">Clear</button>
+      </div>
+      <p class="hint" id="countHint"></p>
+      <div class="pickbar">
+        <input class="input grow" type="search" id="bSearch" placeholder="Search movies" aria-label="Search the movie list">
+        <label class="check"><input type="checkbox" id="bFamily"> Hide R-rated and mature movies</label>
+      </div>
+      <div class="catalog" id="bCatalog"></div>
+      <form class="addown" id="bOwnForm" autocomplete="off">
+        <div class="field">
+          <label for="bOwnTitle">Add a movie that isn't listed</label>
+          <input class="input" id="bOwnTitle" placeholder="e.g. Home Alone">
+        </div>
+        <button class="btn ghost" type="submit">Add</button>
+      </form>
+    </section>
+
+    <div class="build-bar" id="buildBar">
+      <p id="bSummary"></p>
+      <button class="btn" type="button" id="bBuild">Make my schedule</button>
+    </div>
+    <section class="preview" id="bPreview" hidden></section>
+  </section>
+
+  <p class="note" id="syncNote"></p>
+  <div id="ownerBox"></div>
+</main>
+
+<div class="sheet-back" id="sheetBack" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" id="sheet"></div>
+</div>
+
+<script>
+/* ================= reference data ================= */
+const BASE_CATALOG = [{"id":"8-bit-christmas","title":"8-Bit Christmas","year":2021,"mpaa":"PG","director":"Michael Dowse","cast":["Neil Patrick Harris","Winslow Fegley","Steve Zahn","June Diane Raphael"],"synopsis":"A dad tells his daughter about his all-out late-1980s quest as a kid to get the hottest video game system for Christmas.","sub":["HBO Max"],"free":[],"streamCheckedOn":"2026-11-02","rt":84,"runtime":null},{"id":"a-bad-moms-christmas","title":"A Bad Moms Christmas","year":2017,"mpaa":"R","director":"Jon Lucas, Scott Moore","cast":["Mila Kunis","Kristen Bell","Kathryn Hahn","Christine Baranski","Susan Sarandon"],"synopsis":"Three worn-out moms vow to take back Christmas, right as their own mothers arrive for the holidays with very different plans.","sub":["Hulu","Paramount+","Peacock","Starz"],"free":["Roku Channel"],"streamCheckedOn":"2026-11-02","rt":32,"runtime":104},{"id":"a-christmas-story","title":"A Christmas Story","year":1983,"mpaa":"PG","director":"Bob Clark","cast":["Peter Billingsley","Melinda Dillon","Darren McGavin"],"synopsis":"In 1940s Indiana, nine-year-old Ralphie has exactly one Christmas wish: an official Red Ryder BB gun.","sub":[],"free":["Xumo Play"],"streamCheckedOn":"2026-11-02","tag":"xmasday","rt":87,"runtime":null},{"id":"a-merry-friggin-christmas","title":"A Merry Friggin' Christmas","year":2014,"mpaa":"PG-13","director":"Tristram Shapeero","cast":["Joel McHale","Robin Williams","Lauren Graham","Clark Duke","Oliver Platt"],"synopsis":"A man who has avoided his gruff father for years has to make an overnight road trip with him to get his son's presents home before Christmas morning.","sub":["Peacock","Prime Video"],"free":["Tubi","Plex","Hoopla"],"streamCheckedOn":"2026-11-02","rt":14,"runtime":null},{"id":"all-i-want-for-christmas","title":"All I Want For Christmas","year":1991,"mpaa":"G","director":"Robert Lieberman","cast":["Ethan Embry","Thora Birch","Lauren Bacall","Leslie Nielsen"],"synopsis":"Two New York kids hatch a plan to get their divorced parents back together in time for Christmas.","sub":[],"free":["Kanopy","Hoopla"],"streamCheckedOn":"2026-11-02","rt":13,"runtime":92},{"id":"all-is-bright","title":"All Is Bright","year":2013,"mpaa":"R","director":"Phil Morrison","cast":["Paul Giamatti","Paul Rudd","Sally Hawkins","Amy Landecker"],"synopsis":"A newly paroled ex-con and his old partner, now with his ex-wife, team up to sell Christmas trees on the streets of New York.","sub":["Prime Video","Starz"],"free":[],"streamCheckedOn":"2026-11-02","rt":48,"runtime":107},{"id":"best-christmas-ever","title":"Best. Christmas. Ever!","year":2023,"mpaa":"PG","director":"Mary Lambert","cast":["Heather Graham","Brandy Norwood","Jason Biggs","Matt Cedeño"],"synopsis":"A mom who suspects her old college friend's life is too perfect to be true ends up at her house for the holidays, set on finding the cracks.","sub":["Netflix"],"free":[],"streamCheckedOn":"2026-11-02","rt":40,"runtime":80},{"id":"carol","title":"Carol","year":2015,"mpaa":"R","director":"Todd Haynes","cast":["Cate Blanchett","Rooney Mara","Sarah Paulson","Kyle Chandler"],"synopsis":"In 1950s New York, a young department-store clerk and an elegant older woman begin an intense relationship that starts at Christmastime.","sub":["Prime Video"],"free":["Tubi","Kanopy","Hoopla"],"streamCheckedOn":"2026-11-02","rt":94,"runtime":null},{"id":"christmas-every-day","title":"Christmas Every Day","year":1996,"mpaa":"G","director":"Larry Peerce","cast":["Erik von Detten","Robert Hays","Bess Armstrong","Yvonne Zima"],"synopsis":"A self-centered teenager gets stuck reliving Christmas Day over and over after his little sister makes a wish.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":null,"runtime":96},{"id":"christmas-inheritance","title":"Christmas Inheritance","year":2017,"mpaa":"PG","director":"Ernie Barbarash","cast":["Eliza Taylor","Jake Lacy","Andie MacDowell"],"synopsis":"A party-loving heiress is sent to her father's small hometown to deliver a Christmas letter, and has to prove she is ready to run the family business.","sub":["Netflix"],"free":[],"streamCheckedOn":"2026-11-02","rt":43,"runtime":104},{"id":"christmas-is-canceled","title":"Christmas Is Canceled","year":2021,"mpaa":"R","director":"Prarthana Mohan","cast":["Hayley Orrantia","Dermot Mulroney","Janel Parrish"],"synopsis":"A young woman sets out to break up her widowed dad's new relationship with her old high school rival before Christmas.","sub":["Prime Video"],"free":[],"streamCheckedOn":"2026-11-02","rt":null,"runtime":94},{"id":"christmas-with-the-campbells","title":"Christmas with the Campbells","year":2022,"mpaa":"NR","director":"Clare Niederpruem","cast":["Brittany Snow","Justin Long","Alex Moffat","Julia Duffy"],"synopsis":"A raunchy send-up of holiday rom-coms: dumped right before the holidays, a young woman accepts her ex's parents' invitation to spend Christmas with them anyway, and meets his charming cousin.","sub":["AMC+"],"free":[],"streamCheckedOn":"2026-11-02","mature":true,"rt":41,"runtime":88},{"id":"cup-of-cheer","title":"Cup of Cheer","year":2020,"mpaa":"NR","director":"Jake Horowitz","cast":["Storm Steenson","Alexander Oliver","Liam Marshall","Jacob Hogan"],"synopsis":"A deadpan spoof of TV holiday romances: a journalist heads to a small town to write about Christmas cheer and falls for the owner of a hot chocolate shop facing a big corporate rival.","sub":[],"free":["Tubi","Prime Video (free with ads)"],"streamCheckedOn":"2026-11-02","rt":67,"runtime":95},{"id":"daddy-s-home-2","title":"Daddy's Home 2","year":2017,"mpaa":"PG-13","director":"Sean Anders","cast":["Will Ferrell","Mark Wahlberg","Mel Gibson","John Lithgow","John Cena"],"synopsis":"Two co-dads who have finally made peace see their truce tested when their own very different fathers come to town for Christmas.","sub":["MGM+"],"free":[],"streamCheckedOn":"2026-11-02","rt":20,"runtime":98},{"id":"dear-santa","title":"Dear Santa","year":2024,"mpaa":"PG-13","director":"Bobby Farrelly","cast":["Jack Black","Robert Timothy Smith","Brianne Howey","Keegan-Michael Key"],"synopsis":"Thanks to a spelling mistake, a boy's letter to Santa reaches Satan instead, and the devil shows up ready to grant his wishes.","sub":["Paramount+","Prime Video"],"free":[],"streamCheckedOn":"2026-11-02","rt":24,"runtime":108},{"id":"deck-the-halls","title":"Deck the Halls","year":2006,"mpaa":"PG","director":"John Whitesell","cast":["Danny DeVito","Matthew Broderick","Kristin Davis","Kristin Chenoweth"],"synopsis":"A by-the-book optometrist's orderly Christmas falls apart when his new neighbor sets out to light up his house so brightly it can be seen from space.","sub":[],"free":["Plex"],"streamCheckedOn":"2026-11-02","rt":6,"runtime":95},{"id":"diner","title":"Diner","year":1982,"mpaa":"R","director":"Barry Levinson","cast":["Steve Guttenberg","Daniel Stern","Mickey Rourke","Kevin Bacon","Ellen Barkin"],"synopsis":"Baltimore, Christmas week 1959: a group of friends in their twenties trade jokes and worries at their favorite all-night diner as one of them gets ready to marry.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":90,"runtime":110},{"id":"dutch","title":"Dutch","year":1991,"mpaa":"PG-13","director":"Peter Faiman","cast":["Ed O'Neill","Ethan Embry","JoBeth Williams","Christopher McDonald"],"synopsis":"A working-class guy offers to drive his girlfriend's snobby prep-school son home for Thanksgiving, and the road trip goes sideways almost immediately.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","tag":"thanksgiving","rt":17,"runtime":107},{"id":"eight-crazy-nights","title":"Eight Crazy Nights","year":2002,"mpaa":"PG-13","director":"Seth Kearsley","cast":["Adam Sandler","Jackie Titone","Austin Stout","Rob Schneider"],"synopsis":"An animated musical comedy: a holiday-hating troublemaker is sentenced to community service with a kindly youth basketball referee during Hanukkah.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","tag":"hanukkah","rt":13,"runtime":null},{"id":"elf","title":"Elf","year":2003,"mpaa":"PG","director":"Jon Favreau","cast":["Will Ferrell","James Caan","Zooey Deschanel","Mary Steenburgen","Bob Newhart"],"synopsis":"A human raised by Santa's elves at the North Pole travels to New York City to find his real father.","sub":["HBO Max","Prime Video"],"free":[],"streamCheckedOn":"2026-11-02","tag":"finale","rt":85,"runtime":null},{"id":"four-christmases","title":"Four Christmases","year":2008,"mpaa":"PG-13","director":"Seth Gordon","cast":["Vince Vaughn","Reese Witherspoon","Robert Duvall","Sissy Spacek","Jon Voight"],"synopsis":"A couple who always skip the holidays get grounded at the airport and end up visiting all four of their divorced parents on Christmas Day.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":25,"runtime":null},{"id":"friendsgiving","title":"Friendsgiving","year":2020,"mpaa":"R","director":"Nicol Paone","cast":["Malin Akerman","Kat Dennings","Aisha Tyler","Jane Seymour","Chelsea Peretti"],"synopsis":"Two best friends' low-key Thanksgiving gets crashed by exes, new flings, a glamorous mom and a long line of uninvited guests.","sub":["MovieSphere+"],"free":[],"streamCheckedOn":"2026-11-02","tag":"thanksgiving","rt":19,"runtime":95},{"id":"genie","title":"Genie","year":2023,"mpaa":"PG","director":"Sam Boyd","cast":["Melissa McCarthy","Paapa Essiedu","Denée Benton","Marc Maron"],"synopsis":"A workaholic dad who keeps letting his family down accidentally frees a centuries-old genie who is very eager to grant his Christmas wishes.","sub":["Peacock"],"free":[],"streamCheckedOn":"2026-11-02","rt":31,"runtime":92},{"id":"happiest-season","title":"Happiest Season","year":2020,"mpaa":"PG-13","director":"Clea DuVall","cast":["Kristen Stewart","Mackenzie Davis","Alison Brie","Aubrey Plaza","Dan Levy"],"synopsis":"A woman plans to propose to her girlfriend at her family's Christmas, then learns her girlfriend hasn't come out to her parents yet.","sub":["Hulu"],"free":[],"streamCheckedOn":"2026-11-02","rt":82,"runtime":null},{"id":"holidate","title":"Holidate","year":2020,"mpaa":"TV-MA","director":"John Whitesell","cast":["Emma Roberts","Luke Bracey","Kristin Chenoweth"],"synopsis":"Two singles tired of showing up alone agree to be each other's no-strings plus-one for every holiday of the year.","sub":["Netflix"],"free":[],"streamCheckedOn":"2026-11-02","rt":45,"runtime":103},{"id":"home-for-the-holidays","title":"Home for the Holidays","year":1995,"mpaa":"PG-13","director":"Jodie Foster","cast":["Holly Hunter","Robert Downey Jr.","Anne Bancroft","Charles Durning"],"synopsis":"After a rough week, a single mom flies home to Baltimore for Thanksgiving with her loving, exhausting family.","sub":["MGM+"],"free":[],"streamCheckedOn":"2026-11-02","tag":"thanksgiving","rt":63,"runtime":103},{"id":"joy-to-the-world","title":"Joy to the World","year":2025,"mpaa":"G","director":"Jerry Ciccoritti","cast":["Emmanuelle Chriqui","Chad Michael Murray","Ayesha Curry"],"synopsis":"A lifestyle author whose brand rests on a picture-perfect home life scrambles to fake a family when a cooking show comes to film the holidays at her house.","sub":["Hulu"],"free":[],"streamCheckedOn":"2026-11-02","rt":null,"runtime":87},{"id":"just-friends","title":"Just Friends","year":2005,"mpaa":"PG-13","director":"Roger Kumble","cast":["Ryan Reynolds","Amy Smart","Anna Faris","Chris Klein"],"synopsis":"A slick music executive gets stranded in his New Jersey hometown at Christmas and tries to win over the high school best friend who only ever saw him as a pal.","sub":["HBO Max"],"free":[],"streamCheckedOn":"2026-11-02","rt":43,"runtime":94},{"id":"last-christmas","title":"Last Christmas","year":2019,"mpaa":"PG-13","director":"Paul Feig","cast":["Emilia Clarke","Henry Golding","Michelle Yeoh","Emma Thompson"],"synopsis":"A London woman stuck in a rut, working as an elf in a year-round Christmas shop, meets a charming stranger who keeps turning up at just the right moment.","sub":["Hulu"],"free":[],"streamCheckedOn":"2026-11-02","rt":46,"runtime":102},{"id":"last-holiday","title":"Last Holiday","year":2006,"mpaa":"PG-13","director":"Wayne Wang","cast":["Queen Latifah","LL Cool J","Timothy Hutton","Gérard Depardieu"],"synopsis":"A shy department-store clerk gets life-changing news and cashes in everything for a lavish holiday at a grand European resort.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":57,"runtime":112},{"id":"last-train-to-christmas","title":"Last Train to Christmas","year":2021,"mpaa":"NR","director":"Julian Kemp","cast":["Michael Sheen","Cary Elwes","Nathalie Emmanuel","Katherine Kelly"],"synopsis":"A 1980s nightclub owner on a Christmas Eve train finds that walking between carriages sends him to different years of his life.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":80,"runtime":90},{"id":"less-than-zero","title":"Less Than Zero","year":1987,"mpaa":"R","director":"Marek Kanievska","cast":["Andrew McCarthy","Jami Gertz","Robert Downey Jr.","James Spader"],"synopsis":"A college freshman comes home to Los Angeles for Christmas break and finds his best friend caught up in the city's darker party scene.","sub":["Hulu"],"free":[],"streamCheckedOn":"2026-11-02","rt":50,"runtime":97},{"id":"look-who-s-talking-now","title":"Look Who's Talking Now!","year":1993,"mpaa":"PG-13","director":"Tom Ropelewski","cast":["John Travolta","Kirstie Alley","Danny DeVito (voice)","Diane Keaton (voice)"],"synopsis":"The family adds two talking dogs, a streetwise mutt and a pampered poodle, while a holiday work trip puts the parents' marriage to the test.","sub":[],"free":["Tubi"],"streamCheckedOn":"2026-11-02","rt":0,"runtime":97},{"id":"lost-holiday","title":"Lost Holiday","year":2019,"mpaa":"NR","director":"Thomas Matthews, Michael Kerry Matthews","cast":["Kate Lyn Sheil","Thomas Matthews","Keith Poulson","William Jackson Harper"],"synopsis":"Home in suburban Washington, D.C. for Christmas, an adrift thirtysomething and her old friend stumble into an amateur investigation over one long, chaotic night.","sub":["Prime Video"],"free":["Tubi","Hoopla"],"streamCheckedOn":"2026-11-02","mature":true,"rt":46,"runtime":75},{"id":"love-actually","title":"Love Actually","year":2003,"mpaa":"R","director":"Richard Curtis","cast":["Hugh Grant","Emma Thompson","Colin Firth","Liam Neeson","Keira Knightley","Bill Nighy"],"synopsis":"A handful of loosely connected Londoners deal with love in all its forms in the five weeks before Christmas.","sub":["Netflix","Starz"],"free":[],"streamCheckedOn":"2026-11-02","rt":65,"runtime":135},{"id":"love-hard","title":"Love Hard","year":2021,"mpaa":"TV-MA","director":"Hernán Jiménez","cast":["Nina Dobrev","Jimmy O. Yang","Darren Barnet"],"synopsis":"An L.A. dating columnist flies across the country to surprise her dating-app crush for Christmas and finds out he is not who she thought.","sub":["Netflix"],"free":[],"streamCheckedOn":"2026-11-02","rt":50,"runtime":104},{"id":"love-the-coopers","title":"Love the Coopers","year":2015,"mpaa":"PG-13","director":"Jessie Nelson","cast":["Diane Keaton","John Goodman","Ed Helms","Marisa Tomei","Olivia Wilde","Amanda Seyfried"],"synopsis":"Four generations of one family, each keeping a secret, head to the same chaotic Christmas Eve dinner.","sub":["Lionsgate+"],"free":[],"streamCheckedOn":"2026-11-02","rt":19,"runtime":107},{"id":"mixed-nuts","title":"Mixed Nuts","year":1994,"mpaa":"PG-13","director":"Nora Ephron","cast":["Steve Martin","Madeline Kahn","Rita Wilson","Juliette Lewis","Adam Sandler"],"synopsis":"On Christmas Eve, the staff of a struggling Venice Beach crisis hotline face eviction and a parade of eccentric callers and visitors.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":17,"runtime":null},{"id":"national-lampoon-s-christmas-vacation","title":"National Lampoon's Christmas Vacation","year":1989,"mpaa":"PG-13","director":"Jeremiah S. Chechik","cast":["Chevy Chase","Beverly D'Angelo","Randy Quaid","Juliette Lewis","Johnny Galecki"],"synopsis":"Clark Griswold is determined to give his extended family a perfect, old-fashioned Christmas, whatever it takes.","sub":[],"free":["Plex"],"streamCheckedOn":"2026-11-02","tag":"xmaseve","rt":72,"runtime":97},{"id":"office-christmas-party","title":"Office Christmas Party","year":2016,"mpaa":"R","director":"Josh Gordon, Will Speck","cast":["Jason Bateman","Olivia Munn","T.J. Miller","Jennifer Aniston","Kate McKinnon"],"synopsis":"When his CEO sister threatens to shut down his branch, a laid-back manager throws an epic office holiday party to land one big client and save everyone's jobs.","sub":["Paramount+"],"free":[],"streamCheckedOn":"2026-11-02","rt":41,"runtime":105},{"id":"oh-what-fun","title":"Oh. What. Fun.","year":2025,"mpaa":"PG-13","director":"Michael Showalter","cast":["Michelle Pfeiffer","Felicity Jones","Chloë Grace Moretz","Dominic Sessa","Denis Leary"],"synopsis":"A mom who works herself ragged making Christmas perfect gets left behind by her family and sets off on a holiday adventure of her own.","sub":["Prime Video"],"free":[],"streamCheckedOn":"2026-11-02","rt":36,"runtime":null},{"id":"one-magic-christmas","title":"One Magic Christmas","year":1985,"mpaa":"G","director":"Phillip Borsos","cast":["Mary Steenburgen","Harry Dean Stanton","Gary Basaraba","Elisabeth Harnois"],"synopsis":"A struggling mother who has lost her holiday spirit gets a visit from a Christmas angel sent to help her find it again.","sub":["Disney+"],"free":[],"streamCheckedOn":"2026-11-02","rt":50,"runtime":88},{"id":"one-true-thing","title":"One True Thing","year":1998,"mpaa":"R","director":"Carl Franklin","cast":["Meryl Streep","Renée Zellweger","William Hurt"],"synopsis":"A driven New York journalist moves home to care for her ill mother through the holidays and starts to see both her parents differently.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":86,"runtime":127},{"id":"prancer","title":"Prancer","year":1989,"mpaa":"G","director":"John D. Hancock","cast":["Sam Elliott","Rebecca Harrell","Cloris Leachman"],"synopsis":"A farm girl finds a wounded reindeer she is sure belongs to Santa and secretly nurses it back to health.","sub":["MGM+","Prime Video"],"free":["Tubi","Plex"],"streamCheckedOn":"2026-11-02","rt":68,"runtime":103},{"id":"rise-of-the-guardians","title":"Rise of the Guardians","year":2012,"mpaa":"PG","director":"Peter Ramsey","cast":["Chris Pine","Alec Baldwin","Hugh Jackman","Isla Fisher","Jude Law"],"synopsis":"An animated adventure: Jack Frost joins Santa, the Easter Bunny, the Tooth Fairy and the Sandman to protect the world's kids from the Boogeyman.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":75,"runtime":95},{"id":"single-all-the-way","title":"Single All the Way","year":2021,"mpaa":"PG","director":"Michael Mayer","cast":["Michael Urie","Philemon Chambers","Jennifer Coolidge","Kathy Najimy"],"synopsis":"To dodge his family's questions about his love life, a man talks his best friend into posing as his boyfriend for Christmas, but his mom has already set him up.","sub":["Netflix"],"free":[],"streamCheckedOn":"2026-11-02","rt":70,"runtime":99},{"id":"snow-day","title":"Snow Day","year":2000,"mpaa":"PG","director":"Chris Koch","cast":["Mark Webber","Chris Elliott","Zena Grey","Schuyler Fisk","Chevy Chase"],"synopsis":"A surprise snowstorm closes school, and a town's kids get one free day for crushes, schemes and a war against the snowplow man.","sub":["Prime Video"],"free":["Hoopla"],"streamCheckedOn":"2026-11-02","rt":28,"runtime":89},{"id":"surviving-christmas","title":"Surviving Christmas","year":2004,"mpaa":"PG-13","director":"Mike Mitchell","cast":["Ben Affleck","James Gandolfini","Christina Applegate","Catherine O'Hara"],"synopsis":"A lonely rich executive pays a family a small fortune to let him spend Christmas at their house and act as his own family.","sub":[],"free":["Hoopla"],"streamCheckedOn":"2026-11-02","rt":8,"runtime":null},{"id":"the-apartment","title":"The Apartment","year":1960,"mpaa":"NR","director":"Billy Wilder","cast":["Jack Lemmon","Shirley MacLaine","Fred MacMurray"],"synopsis":"An ambitious insurance clerk lends out his apartment to company executives, and falls for the elevator operator caught up in one of their affairs.","sub":[],"free":["Tubi","Plex","Kanopy","Hoopla"],"streamCheckedOn":"2026-11-02","tag":"newyears","rt":94,"runtime":null},{"id":"the-baltimorons","title":"The Baltimorons","year":2025,"mpaa":"R","director":"Jay Duplass","cast":["Michael Strassner","Liz Larsen","Olivia Luccardi"],"synopsis":"On Christmas Eve, a newly sober former improv comic with a dental emergency spends the day roaming Baltimore with the older dentist who treats him.","sub":["AMC+","Sundance Now"],"free":[],"streamCheckedOn":"2026-11-02","rt":93,"runtime":99},{"id":"the-best-christmas-pageant-ever","title":"The Best Christmas Pageant Ever","year":2024,"mpaa":"PG","director":"Dallas Jenkins","cast":["Judy Greer","Pete Holmes","Lauren Graham","Molly Belle Wright"],"synopsis":"A mom reluctantly takes over her church's Christmas pageant, and the town's most notorious kids grab every lead role.","sub":["Peacock","Starz"],"free":[],"streamCheckedOn":"2026-11-02","rt":92,"runtime":null},{"id":"the-christmas-classic","title":"The Christmas Classic","year":2023,"mpaa":"NR","director":"Shane Dax Taylor","cast":["Malin Akerman","Amy Smart","Ryan Hansen","Chris Mullinax"],"synopsis":"A woman goes home to New Mexico for the holidays with orders to convince her ex to sell his ski resort to her boss.","sub":["Prime Video"],"free":["Tubi"],"streamCheckedOn":"2026-11-02","rt":null,"runtime":86},{"id":"the-family-man","title":"The Family Man","year":2000,"mpaa":"PG-13","director":"Brett Ratner","cast":["Nicolas Cage","Téa Leoni","Don Cheadle","Jeremy Piven"],"synopsis":"A wealthy, single Wall Street dealmaker wakes up on Christmas morning inside the suburban family life he might have had if he had made a different choice.","sub":["Hulu","Peacock"],"free":[],"streamCheckedOn":"2026-11-02","rt":54,"runtime":125},{"id":"the-family-stone","title":"The Family Stone","year":2005,"mpaa":"PG-13","director":"Thomas Bezucha","cast":["Sarah Jessica Parker","Diane Keaton","Rachel McAdams","Dermot Mulroney","Luke Wilson"],"synopsis":"An uptight businesswoman meets her boyfriend's free-spirited, tight-knit family over Christmas, and they do not exactly warm to her.","sub":["Prime Video"],"free":["Pluto TV"],"streamCheckedOn":"2026-11-02","rt":52,"runtime":104},{"id":"the-fitzgerald-family-christmas","title":"The Fitzgerald Family Christmas","year":2012,"mpaa":"PG-13","director":"Edward Burns","cast":["Edward Burns","Connie Britton","Kerry Bishé","Ed Lauter"],"synopsis":"Seven grown siblings have to decide whether to let their long-absent father come home for Christmas.","sub":["MGM+","Paramount+"],"free":[],"streamCheckedOn":"2026-11-02","rt":65,"runtime":102},{"id":"the-holdovers","title":"The Holdovers","year":2023,"mpaa":"R","director":"Alexander Payne","cast":["Paul Giamatti","Da'Vine Joy Randolph","Dominic Sessa"],"synopsis":"Over Christmas break in 1970, a cranky boarding-school teacher is stuck minding a troublemaking student with nowhere to go, alongside the school's head cook.","sub":["Peacock"],"free":[],"streamCheckedOn":"2026-11-02","rt":97,"runtime":null},{"id":"the-ice-harvest","title":"The Ice Harvest","year":2005,"mpaa":"R","director":"Harold Ramis","cast":["John Cusack","Billy Bob Thornton","Connie Nielsen","Oliver Platt","Randy Quaid"],"synopsis":"On an icy Christmas Eve in Wichita, a mob lawyer and his partner try to skip town with stolen money, and nothing goes to plan.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":47,"runtime":88},{"id":"the-last-christmas-party","title":"The Last Christmas Party","year":2020,"mpaa":"PG-13","director":"Julian Carlo Santos","cast":["Anna Clare Kerr","James Williams","Samantha Brooks","Lainey Woo"],"synopsis":"Three college couples spend one last night of holiday parties before everyone heads home for winter break.","sub":["Prime Video"],"free":["Tubi","Roku Channel","Plex"],"streamCheckedOn":"2026-11-02","rt":null,"runtime":84},{"id":"the-night-before","title":"The Night Before","year":2015,"mpaa":"R","director":"Jonathan Levine","cast":["Seth Rogen","Joseph Gordon-Levitt","Anthony Mackie","Lizzy Caplan"],"synopsis":"Three lifelong friends spend one last Christmas Eve together in New York, chasing the legendary party they have hunted for years.","sub":["Netflix"],"free":["Xumo Play"],"streamCheckedOn":"2026-11-02","tag":"xmaseve","rt":68,"runtime":101},{"id":"the-ref","title":"The Ref","year":1994,"mpaa":"R","director":"Ted Demme","cast":["Denis Leary","Judy Davis","Kevin Spacey"],"synopsis":"A cat burglar on the run on Christmas Eve takes a bickering married couple hostage and quickly regrets it.","sub":[],"free":["Hoopla"],"streamCheckedOn":"2026-11-02","rt":73,"runtime":null},{"id":"unaccompanied-minors","title":"Unaccompanied Minors","year":2006,"mpaa":"PG","director":"Paul Feig","cast":["Dyllan Christopher","Lewis Black","Wilmer Valderrama","Tyler James Williams"],"synopsis":"A group of kids flying alone get stuck at a snowed-in airport on Christmas Eve and decide not to stay put.","sub":[],"free":[],"streamCheckedOn":"2026-11-02","rt":29,"runtime":null},{"id":"what-happens-later","title":"What Happens Later","year":2023,"mpaa":"R","director":"Meg Ryan","cast":["Meg Ryan","David Duchovny"],"synopsis":"Two former lovers end up snowed in together overnight at a small regional airport.","sub":[],"free":["Plex","Kanopy"],"streamCheckedOn":"2026-11-02","rt":51,"runtime":103}];
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const DOW_LONG = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const pad = n => String(n).padStart(2, "0");
+const isoOf = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const dateOf = iso => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); };
+const addDays = (iso, n) => { const d = dateOf(iso); return isoOf(new Date(d.getFullYear(), d.getMonth(), d.getDate() + n)); };
+const nightsBetween = (a, b) => { const out = []; for (let n = a; n <= b; n = addDays(n, 1)) out.push(n); return out; };
+const shortDate = iso => { const d = dateOf(iso); return DOW[d.getDay()] + ", " + MON[d.getMonth()] + " " + d.getDate(); };
+const slugify = t => String(t).toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 100) || "movie";
+const TODAY = isoOf(new Date());
+const SEASON_FIRST = "2026-11-01", SEASON_LAST = "2026-12-31";
+const OWNER_SETTINGS = { start: "2026-11-01", end: "2026-12-25", doubles: "sat" };
+const LS_KEY = "xmas-countdown-2026-mylist";
+const STAR_PATH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 6 6.5.8-4.8 4.5 1.2 6.5L12 17.3l-5.8 3.1 1.2-6.5L2.6 9.4l6.5-.8z"/></svg>';
+
+/* Holiday windows (2026): each tag lists the nights to try, best first. */
+const HOLIDAYS = {
+  thanksgiving: { chip: "Thanksgiving", nights: ["2026-11-26", "2026-11-25", "2026-11-27", "2026-11-24", "2026-11-28", "2026-11-23", "2026-11-22"],
+    label: n => n === "2026-11-26" ? "Thanksgiving Day" : n === "2026-11-25" ? "Thanksgiving Eve" : "Thanksgiving week" },
+  hanukkah: { chip: "Hanukkah", nights: ["2026-12-04", "2026-12-05", "2026-12-06", "2026-12-07", "2026-12-08", "2026-12-09", "2026-12-10", "2026-12-11"],
+    label: n => n === "2026-12-04" ? "First night of Hanukkah" : "Hanukkah" },
+  xmaseve: { chip: "Christmas Eve", nights: ["2026-12-24", "2026-12-23", "2026-12-22"], label: n => n === "2026-12-24" ? "Christmas Eve" : "Christmas week" },
+  xmasday: { chip: "Christmas Day", nights: ["2026-12-25", "2026-12-24", "2026-12-23"], label: n => n === "2026-12-25" ? "Christmas Day" : n === "2026-12-24" ? "Christmas Eve" : "Christmas week" },
+  finale: { chip: "Christmas week", nights: ["2026-12-19", "2026-12-20", "2026-12-18", "2026-12-21", "2026-12-22"], label: n => n === "2026-12-19" ? "Last Saturday before Christmas" : "Christmas week" },
+  newyears: { chip: "New Year's Eve", nights: ["2026-12-31", "2026-12-30"], label: n => n === "2026-12-31" ? "New Year's Eve" : "New Year's week" },
+};
+const isDouble = (night, mode) => { const d = dateOf(night).getDay(); return mode === "sat" ? d === 6 : mode === "weekend" ? (d === 5 || d === 6 || d === 0) : false; };
+const capacityOf = s => nightsBetween(s.start, s.end).reduce((t, n) => t + 1 + (isDouble(n, s.doubles) ? 1 : 0), 0);
+const isMature = m => m && (m.mature || ["R", "TV-MA", "NC-17"].includes(String(m.mpaa || "").toUpperCase()));
+
+const $ = id => document.getElementById(id);
+function el(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+/* ================= state ================= */
+const catalog = new Map(BASE_CATALOG.map(m => [m.id, m]));
+const ctx = { role: "pending", db: null, sample: null, user: null, uid: null, store: null, readOnly: false, assets: null };
+// The active list: the owner's shared list, or this visitor's own list.
+const L = { kind: null, loaded: false, settings: OWNER_SETTINGS, movies: new Map(), watched: new Set(), ratings: new Map(), seen: new Set() };
+let P = null; // a visitor's own list blob
+const ui = { sheet: null, editing: null, confirmRemove: null, filling: new Set(), night: null, uploading: false };
+const B = { start: null, end: "2026-12-25", doubles: "sat", picked: new Set(), own: new Map(), family: false, q: "", count: null, touchedCount: false, preview: null };
+let sheetOpener = null;
+
+const titleOf = id => (L.movies.get(id) || catalog.get(id) || {}).title || "";
+function sortedList() {
+  return [...L.movies.entries()].sort((a, b) => {
+    const na = a[1].night || "9999", nb = b[1].night || "9999";
+    if (na !== nb) return na < nb ? -1 : 1;
+    const sa = a[1].slot ?? 0, sb = b[1].slot ?? 0;
+    if (sa !== sb) return sa - sb;
+    return String(a[1].title).localeCompare(String(b[1].title));
+  });
+}
+const listNights = () => nightsBetween(L.settings.start, L.settings.end);
+function groupByNight(entries, nights) {
+  const map = new Map(nights.map(n => [n, []]));
+  const loose = [];
+  for (const [id, m] of entries) { if (m.night && map.has(m.night)) map.get(m.night).push([id, m]); else loose.push([id, m]); }
+  return { map, loose };
+}
+
+/* ================= scheduler ================= */
+// Places movies on nights: holiday movies go into their windows first, the rest are shuffled and spread evenly.
+function buildSchedule(ids, s, fixed) {
+  const nights = nightsBetween(s.start, s.end);
+  const cap = new Map(nights.map(n => [n, 1 + (isDouble(n, s.doubles) ? 1 : 0)]));
+  const used = new Map(nights.map(n => [n, 0]));
+  for (const n of (fixed || [])) if (used.has(n)) used.set(n, used.get(n) + 1);
+  const out = {};
+  const put = (id, n, note) => { out[id] = { night: n, slot: used.get(n), note: note || "" }; used.set(n, used.get(n) + 1); };
+  const rest = [];
+  for (const id of shuffle(ids.slice())) {
+    const h = HOLIDAYS[(catalog.get(id) || {}).tag];
+    let n = null;
+    if (h) n = h.nights.find(x => used.has(x) && used.get(x) === 0) || h.nights.find(x => used.has(x) && used.get(x) < cap.get(x));
+    if (n) put(id, n, h.label(n)); else rest.push(id);
+  }
+  const empty = nights.filter(n => used.get(n) === 0);
+  let i = 0;
+  if (rest.length <= empty.length) {
+    const M = rest.length, Lx = empty.length;
+    for (let k = 0; k < M; k++) put(rest[i++], empty[Math.floor((k + 0.5) * Lx / M)]);
+  } else {
+    empty.forEach(n => put(rest[i++], n));
+    const extra = nights.filter(n => used.get(n) < cap.get(n));
+    const M = rest.length - i, Lx = extra.length;
+    for (let k = 0; k < M && Lx; k++) put(rest[i++], extra[Math.min(Lx - 1, Math.floor((k + 0.5) * Lx / M))]);
+    while (i < rest.length) out[rest[i++]] = { night: null, slot: 0, note: "" };
+  }
+  return out;
+}
+
+/* ================= small builders ================= */
+function paintStars(row, v) {
+  row.querySelectorAll(".st").forEach((s, i) => s.style.setProperty("--f", v >= i + 1 ? "100%" : v >= i + 0.5 ? "50%" : "0%"));
+}
+const fmtStars = v => v ? (Number.isInteger(v) ? v + ".0" : String(v)) : "";
+function starsEl(id, key, large) {
+  const val = L.ratings.get(id) || 0;
+  const wrap = el("div", "stars" + (large ? " lg" : ""));
+  wrap.id = "st-" + key + "-" + id;
+  wrap.tabIndex = 0;
+  wrap.setAttribute("role", "slider");
+  wrap.setAttribute("aria-label", "Your rating for " + titleOf(id));
+  wrap.setAttribute("aria-valuemin", "0"); wrap.setAttribute("aria-valuemax", "5");
+  wrap.setAttribute("aria-valuenow", String(val));
+  wrap.setAttribute("aria-valuetext", val ? val + " stars" : "Not rated");
+  const locked = !canWrite();
+  if (locked) wrap.setAttribute("aria-disabled", "true");
+  const row = el("span", "st-row");
+  for (let i = 0; i < 5; i++) { const s = el("span", "st"); s.innerHTML = STAR_PATH + '<span class="fill">' + STAR_PATH + "</span>"; row.append(s); }
+  const lab = el("span", "st-val", fmtStars(val));
+  wrap.append(row, lab);
+  paintStars(row, val);
+  if (!locked) {
+    const valueAt = e => { const r = row.getBoundingClientRect(); const x = Math.min(Math.max(e.clientX - r.left, 0), r.width); return Math.max(0.5, Math.ceil((x / r.width) * 10) / 2); };
+    row.addEventListener("pointermove", e => { const v = valueAt(e); paintStars(row, v); lab.textContent = fmtStars(v); });
+    row.addEventListener("pointerleave", () => { const v = L.ratings.get(id) || 0; paintStars(row, v); lab.textContent = fmtStars(v); });
+    row.addEventListener("click", e => { const v = valueAt(e); setRating(id, (L.ratings.get(id) || 0) === v ? 0 : v); });
+    wrap.addEventListener("keydown", e => {
+      const cur = L.ratings.get(id) || 0; let v = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowUp") v = Math.min(5, cur + 0.5);
+      else if (e.key === "ArrowLeft" || e.key === "ArrowDown") v = Math.max(0, cur - 0.5);
+      else if (e.key === "Home" || e.key === "0") v = 0;
+      else if (e.key === "End") v = 5;
+      else if (/^[1-5]$/.test(e.key)) v = Number(e.key);
+      if (v !== null) { e.preventDefault(); setRating(id, v, true); }
+    });
+  }
+  return wrap;
+}
+function watchBox(id, key) {
+  const b = el("input", "watch");
+  b.type = "checkbox"; b.id = key + "-" + id;
+  b.dataset.action = "watch"; b.dataset.id = id;
+  b.checked = L.watched.has(id);
+  b.disabled = !canWrite();
+  b.setAttribute("aria-label", "Watched " + titleOf(id));
+  return b;
+}
+function metaLine(m, withDirector) {
+  const parts = [];
+  if (m.year) parts.push(String(m.year));
+  if (withDirector && m.director) parts.push(m.director);
+  const line = el("span", "meta", parts.join(" · "));
+  if (m.mpaa) line.append(parts.length ? " " : "", el("span", "rating-badge", m.mpaa));
+  return line;
+}
+function castLine(m, n) {
+  if (!m.cast || !m.cast.length) return null;
+  const p = el("p", "cast"); const b = el("b", null, "Starring"); p.append(b, m.cast.slice(0, n || 3).join(", "));
+  return p;
+}
+const PALETTES = [["#7A1420","#2B0A0F","#F7C64F"],["#0F4D36","#05231A","#FFF1C9"],["#1F3A6B","#0B1630","#F7C64F"],["#F7C64F","#B8841A","#2A0E12"],["#5E1B4F","#22081D","#FFD7E8"],["#E8E2D0","#A79F88","#7A1420"],["#123B4A","#061C24","#9FE3F5"],["#B02030","#5A0A14","#FFF1C9"],["#2E2A26","#0E0C0A","#FF6B73"]];
+function hashStr(t) { let h = 2166136261; for (const ch of String(t)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function coverEl(id, m, opts) {
+  opts = opts || {};
+  const d = el("div", "cover" + (opts.lg ? " lg" : ""));
+  const p = PALETTES[hashStr(id) % PALETTES.length];
+  d.style.setProperty("--c1", p[0]); d.style.setProperty("--c2", p[1]); d.style.setProperty("--c3", p[2]);
+  d.append(el("span", "cv-band"), el("span", "cv-band b2"), el("span", "cv-title", m.title || ""), el("span", "cv-year", m.year ? String(m.year) : ""));
+  if (m.posterId) { const img = document.createElement("img"); img.alt = ""; img.loading = "lazy"; img.src = "/_blob/" + m.posterId; img.addEventListener("error", () => img.remove()); d.append(img); }
+  d.setAttribute("aria-hidden", "true");
+  if (opts.open) { d.dataset.action = "open"; d.dataset.id = id; if (opts.from) d.dataset.from = opts.from; }
+  return d;
+}
+function rtBadge(m) {
+  if (m.rt === null || m.rt === undefined || m.rt === "") return null;
+  const v = Number(m.rt);
+  const b = el("span", "rt" + (v < 60 ? " rotten" : ""), (m.rtEstimated ? "~" : "") + v + "%");
+  b.title = "Rotten Tomatoes Tomatometer" + (m.rtEstimated ? " (Claude's estimate)" : "");
+  b.setAttribute("aria-label", "Rotten Tomatoes " + v + " percent");
+  return b;
+}
+function seenBox(id, key) {
+  const l = el("label", "seen");
+  const i = el("input"); i.type = "checkbox"; i.id = "sn-" + key + "-" + id; i.dataset.action = "seen"; i.dataset.id = id;
+  i.checked = L.seen.has(id); i.disabled = !canWrite();
+  l.append(i, el("span", null, "Seen before"));
+  return l;
+}
+function filmItem(id, m, key, ro) {
+  const done = !ro && L.watched.has(id);
+  const li = el("li", "film" + (done ? " done" : "") + (ro ? " ro" : ""));
+  const body = el("div", "body");
+  const tr = el("div", "title-row");
+  const t = el("button", "titlebtn", m.title);
+  t.type = "button"; t.id = "o-" + key + "-" + id; t.dataset.action = "open"; t.dataset.id = id; if (ro) t.dataset.from = "catalog";
+  tr.append(t, metaLine(m));
+  const rb = rtBadge(m); if (rb) tr.append(rb);
+  if (m.note) tr.append(el("span", "chip", m.note));
+  body.append(tr);
+  if (m.synopsis) body.append(el("p", "syn", m.synopsis));
+  const c = castLine(m); if (c) body.append(c);
+  if (!ro) { const yr = el("div", "yourrow"); yr.append(starsEl(id, key), seenBox(id, key)); body.append(yr); }
+  if (ro) li.append(coverEl(id, m), body); else li.append(watchBox(id, key), coverEl(id, m, { open: true }), body);
+  return li;
+}
+
+/* ================= lights ================= */
+const BULB_COLORS = ["var(--b1)", "var(--b2)", "var(--b3)", "var(--b4)", "var(--b5)"];
+function lightsSource() {
+  if (L.loaded && L.movies.size) return sortedList().map(([id, m]) => ({ id, title: m.title, on: L.watched.has(id), from: "list" }));
+  return [...B.picked].map(id => ({ id, title: (catalog.get(id) || B.own.get(id) || {}).title || "", on: false, from: "catalog" }));
+}
+function renderLights() {
+  const svg = $("lights");
+  const W = Math.max(280, $("lightsWrap").clientWidth || 360);
+  const list = lightsSource();
+  const N = list.length;
+  const per = Math.max(8, Math.floor((W - 24) / 25));
+  const rows = Math.max(1, Math.ceil(N / per));
+  const perRow = Math.max(1, Math.ceil(N / rows));
+  const rowH = 46, top = 10, H = top + rows * rowH + 14;
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  svg.setAttribute("height", H);
+  const NS = "http://www.w3.org/2000/svg";
+  svg.textContent = "";
+  let idx = 0;
+  for (let r = 0; r < rows; r++) {
+    const y0 = top + r * rowH, sag = 22, x0 = -6, x2 = W + 6, cx = W / 2, cy = y0 + sag * 2;
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("class", "wire"); path.setAttribute("d", `M${x0},${y0} Q${cx},${cy} ${x2},${y0}`);
+    svg.append(path);
+    const count = Math.min(perRow, N - idx), span = (W - 20) / W;
+    for (let i = 0; i < count; i++, idx++) {
+      const b = list[idx];
+      const t = (1 - span) / 2 + span * ((i + 0.5) / perRow) + (perRow - count) * span / perRow / 2;
+      const x = (1 - t) * (1 - t) * x0 + 2 * (1 - t) * t * cx + t * t * x2;
+      const y = (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * cy + t * t * y0;
+      const dx = 2 * (1 - t) * (cx - x0) + 2 * t * (x2 - cx), dy = 2 * (1 - t) * (cy - y0) + 2 * t * (y0 - cy);
+      const g = document.createElementNS(NS, "g");
+      g.setAttribute("class", "bulb" + (b.on ? " on" : ""));
+      g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${(Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1)})`);
+      g.style.setProperty("--c", BULB_COLORS[idx % 5]);
+      g.style.setProperty("--d", (-(idx * 0.41) % 3.4).toFixed(2) + "s");
+      g.dataset.action = "open"; g.dataset.id = b.id; g.dataset.from = b.from;
+      const tt = document.createElementNS(NS, "title"); tt.textContent = b.title + (b.on ? " (watched)" : "");
+      const cap = document.createElementNS(NS, "rect");
+      cap.setAttribute("class", "cap"); cap.setAttribute("x", -3.2); cap.setAttribute("y", 0); cap.setAttribute("width", 6.4); cap.setAttribute("height", 6); cap.setAttribute("rx", 1.2);
+      const glass = document.createElementNS(NS, "path");
+      glass.setAttribute("class", "glass"); glass.setAttribute("d", "M0,5 C5.6,8.5 6.4,16 0,23 C-6.4,16 -5.6,8.5 0,5 Z");
+      g.append(tt, cap, glass);
+      svg.append(g);
+    }
+  }
+  if (N === 0) {
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("class", "wire"); path.setAttribute("d", `M-6,${top} Q${W / 2},${top + 44} ${W + 6},${top}`);
+    svg.append(path);
+  }
+}
+
+/* ================= header + schedule ================= */
+const hasList = () => L.loaded && (L.kind === "owner" || (L.kind === "personal" && P));
+function renderStats() {
+  const box = $("stats"); box.textContent = "";
+  $("tab-database").textContent = ctx.role === "owner" ? "Database" : "My movies";
+  $("dbTitle").textContent = ctx.role === "owner" ? "Database" : "My movies";
+  if (ctx.role === "pending") { box.append(el("span", null, "Loading…")); return; }
+  if (!hasList()) {
+    $("eyebrow").textContent = "Christmas movies, one night at a time";
+    box.append(el("span", null, B.picked.size ? B.picked.size + " movies picked" : "Pick your movies to start your countdown"));
+    return;
+  }
+  const s = L.settings, nights = listNights(), all = sortedList();
+  $("eyebrow").textContent = MON[dateOf(s.start).getMonth()] + " " + dateOf(s.start).getDate() + " – " + MON[dateOf(s.end).getMonth()] + " " + dateOf(s.end).getDate() + " · " + nights.length + " nights · " + all.length + " movies";
+  const watched = all.filter(([id]) => L.watched.has(id)).length;
+  const a = el("span"); a.append(el("strong", null, String(watched)), " of " + all.length + " watched"); box.append(a);
+  if (TODAY >= s.start) {
+    const behind = all.filter(([id, m]) => m.night && (m.night < TODAY || TODAY > s.end) && !L.watched.has(id)).length;
+    if (watched === all.length && all.length) box.append(el("span", null, "All watched"));
+    else if (behind > 0) box.append(el("span", "behind", behind + (behind === 1 ? " movie" : " movies") + " to catch up"));
+    else box.append(el("span", null, "Right on schedule"));
+  }
+  const rated = all.map(([id]) => L.ratings.get(id)).filter(Boolean);
+  if (rated.length) box.append(el("span", null, "Average ★ " + (rated.reduce((x, y) => x + y, 0) / rated.length).toFixed(1)));
+}
+
+function emptyListPanel(host, msg) {
+  const p = el("section", "panel empty-state");
+  p.append(el("h2", null, "No list yet"), el("p", null, msg));
+  const a = el("a", "btn gold", "Make my list"); a.href = "#build"; a.style.justifySelf = "start"; a.style.textDecoration = "none";
+  p.append(a);
+  host.append(p);
+}
+
+function renderTonight(groups) {
+  const box = $("tonight"); box.textContent = "";
+  box.hidden = false;
+  if (ctx.role === "pending" || (L.kind === "owner" && !L.loaded)) { box.append(el("p", "fine", "Loading tonight's movie…")); return; }
+  if (!hasList()) { box.hidden = true; return; }
+  const s = L.settings, nights = listNights();
+  const head = el("div", "tonight-head");
+  let films = [], heading, when;
+  if (TODAY < s.start) { films = groups.map.get(s.start) || []; heading = "Opening night"; when = DOW_LONG[dateOf(s.start).getDay()] + ", " + MON[dateOf(s.start).getMonth()] + " " + dateOf(s.start).getDate(); }
+  else if (TODAY > s.end) { heading = "That's a wrap"; when = "Season 2026"; }
+  else {
+    films = groups.map.get(TODAY) || [];
+    const d = dateOf(TODAY);
+    heading = films.length > 1 ? "Tonight's double feature" : "Tonight";
+    when = "Night " + (nights.indexOf(TODAY) + 1) + " of " + nights.length + " · " + DOW_LONG[d.getDay()] + ", " + MON[d.getMonth()] + " " + d.getDate();
+  }
+  head.append(el("h2", null, heading), el("span", "when", when));
+  box.append(head);
+  if (films.length) { const ul = el("ul", "films"); films.forEach(([id, m]) => ul.append(filmItem(id, m, "t"))); box.append(ul); }
+  else if (TODAY <= s.end) box.append(el("p", "fine", "Nothing scheduled tonight. Enjoy the night off, or give a movie this night from its details."));
+  if (TODAY >= s.start && TODAY <= s.end) {
+    const r = el("div", "row2");
+    if (canWrite()) { const c = el("button", "btn ghost small", films.length ? "Change tonight's movie" : "Pick a movie for tonight"); c.type = "button"; c.dataset.action = "edit-night"; c.dataset.night = TODAY; c.id = "en-tonight"; r.append(c); }
+    const b = el("button", "linkish", "Jump to today in the schedule"); b.type = "button"; b.dataset.action = "jump"; r.append(b);
+    box.append(r);
+  }
+}
+
+function scheduleInto(host, groups, nights, ro, key) {
+  let week = null, list = null, n = 0;
+  nights.forEach((night, idx) => {
+    const d = dateOf(night);
+    if (!week || d.getDay() === 0) {
+      n++;
+      week = el("section", "week");
+      const h = el("h3");
+      const last = dateOf(nights[Math.min(idx + (6 - d.getDay()), nights.length - 1)]);
+      h.append(el("span", null, "Week " + n), el("span", null, MON[d.getMonth()] + " " + d.getDate() + " – " + (last.getMonth() !== d.getMonth() ? MON[last.getMonth()] + " " : "") + last.getDate()));
+      list = el("div", "days"); week.append(h, list); host.append(week);
+    }
+    const films = groups.map.get(night) || [];
+    const row = el("div", "day" + (d.getDay() === 6 ? " sat" : "") + (!ro && night < TODAY ? " past" : "") + (!ro && night === TODAY ? " today" : ""));
+    if (!ro) row.id = "d-" + night;
+    const date = el("div", "date");
+    date.append(el("span", "dow", !ro && night === TODAY ? "Tonight" : DOW[d.getDay()]), el("span", "num", d.getDate()), el("span", "mon", MON[d.getMonth()]));
+    const content = el("div", "content");
+    const head = el("div", "day-head");
+    if (films.length > 1) head.append(el("span", "tag", films.length === 2 ? "Double feature" : films.length + " movies"));
+    if (!films.length) head.append(el("span", "open-night", "No movie"));
+    if (!ro && canWrite()) { const eb = el("button", "editnight", films.length ? "Edit night" : "Add a movie"); eb.type = "button"; eb.dataset.action = "edit-night"; eb.dataset.night = night; eb.id = "en-" + night; head.append(eb); }
+    content.append(head);
+    if (films.length) { const ul = el("ul", "films"); films.forEach(([id, m]) => ul.append(filmItem(id, m, key, ro))); content.append(ul); }
+    row.append(date, content); list.append(row);
+  });
+}
+
+function renderWeeks(groups) {
+  const host = $("weeks"); host.textContent = "";
+  const un = $("unscheduled"); un.textContent = ""; un.hidden = true;
+  const rules = $("rules");
+  if (ctx.role === "pending" || (L.kind === "owner" && !L.loaded)) { rules.textContent = ""; host.append(el("p", "empty", "Loading the schedule…")); return; }
+  if (!hasList()) { rules.textContent = ""; emptyListPanel(host, "Pick the Christmas movies you want to watch, choose how many nights and whether you want double features, and get your own nightly schedule."); return; }
+  const s = L.settings;
+  rules.textContent = (s.doubles === "sat" ? "One movie a night and a double feature every Saturday. " : s.doubles === "weekend" ? "Double features on Fridays, Saturdays and Sundays. " : "") +
+    "Tap a title or cover to open its VHS box. Use Edit night on any day to swap a movie, take it off, or add more. Check a movie off when you've watched it, then give it stars; half stars count.";
+  scheduleInto(host, groups, listNights(), false, "w");
+  if (groups.loose.length) {
+    un.hidden = false;
+    const wk = el("section", "week");
+    const h = el("h3"); h.append(el("span", null, "Not on the schedule yet"), el("span", null, String(groups.loose.length)));
+    const box = el("div", "days"), row = el("div", "day");
+    const date = el("div", "date"); date.append(el("span", "dow", "Pick a night"));
+    const content = el("div", "content"), ul = el("ul", "films");
+    groups.loose.forEach(([id, m]) => ul.append(filmItem(id, m, "u")));
+    content.append(ul); row.append(date, content); box.append(row); wk.append(h, box); un.append(wk);
+  }
+}
+
+/* ================= database tab ================= */
+function nightOptions(select, current, withAuto) {
+  const counts = new Map();
+  for (const [, m] of L.movies) if (m.night) counts.set(m.night, (counts.get(m.night) || 0) + 1);
+  const keep = select.value;
+  select.textContent = "";
+  if (withAuto) { const o = el("option", null, "Next open night"); o.value = "auto"; select.append(o); }
+  const o0 = el("option", null, "Not scheduled yet"); o0.value = ""; select.append(o0);
+  for (const night of listNights()) {
+    const c = counts.get(night) || 0;
+    const o = el("option", null, shortDate(night) + (c ? " · " + c + (c === 1 ? " movie" : " movies") : " · open"));
+    o.value = night; select.append(o);
+  }
+  select.value = current !== undefined ? (current || "") : (keep || (withAuto ? "auto" : ""));
+}
+function nextOpenNight() {
+  const counts = new Map();
+  for (const [, m] of L.movies) if (m.night) counts.set(m.night, (counts.get(m.night) || 0) + 1);
+  const from = listNights().filter(n => n >= TODAY);
+  return from.find(n => !counts.get(n)) || from.find(n => (counts.get(n) || 0) < 1 + (isDouble(n, L.settings.doubles) ? 1 : 0)) || null;
+}
+function renderDb() {
+  const listEl = $("dbList"); listEl.textContent = "";
+  const empty = $("dbEmpty"); empty.textContent = "";
+  const show = hasList();
+  $("addForm").hidden = !show; $("dbCount").hidden = !show; document.querySelector(".db-tools").hidden = !show;
+  $("rebuildHint").hidden = !(show && L.kind === "personal" && canWrite());
+  if (ctx.role === "pending" || (L.kind === "owner" && !L.loaded)) { listEl.append(el("p", "empty", "Loading…")); return; }
+  if (!show) { empty.hidden = false; emptyListPanel(empty, "Your movies show up here once you make a list. You can add and remove movies any time after that."); return; }
+  empty.hidden = true;
+  const dl = $("catalogTitles"); dl.textContent = "";
+  for (const [id, m] of catalog) if (!L.movies.has(id)) { const o = el("option"); o.value = m.title; dl.append(o); }
+  const q = $("dbSearch").value.trim().toLowerCase(), sort = $("dbSort").value;
+  let rows = sortedList();
+  if (q) rows = rows.filter(([, m]) => [m.title, m.director, ...(m.cast || [])].join(" ").toLowerCase().includes(q));
+  const bare = t => String(t).replace(/^(the|a|an) /i, "");
+  if (sort === "title") rows.sort((a, b) => bare(a[1].title).localeCompare(bare(b[1].title)));
+  if (sort === "year") rows.sort((a, b) => (b[1].year || 0) - (a[1].year || 0));
+  if (sort === "stars") rows.sort((a, b) => (L.ratings.get(b[0]) || 0) - (L.ratings.get(a[0]) || 0));
+  const total = L.movies.size, w = [...L.movies.keys()].filter(id => L.watched.has(id)).length, r = [...L.movies.keys()].filter(id => L.ratings.get(id)).length;
+  $("dbCount").textContent = (q ? rows.length + " of " : "") + total + " movies · " + w + " watched · " + r + " rated";
+  if (!rows.length) { listEl.append(el("p", "empty", q ? "No movies match that search." : "No movies yet. Add the first one above.")); return; }
+  for (const [id, m] of rows) {
+    const row = el("div", "dbrow"); row.setAttribute("role", "listitem");
+    const main = el("div", "dbmain");
+    const t = el("button", "titlebtn", m.title); t.type = "button"; t.id = "o-db-" + id; t.dataset.action = "open"; t.dataset.id = id;
+    const ml = metaLine(m, true); const rb = rtBadge(m); if (rb) ml.append(" ", rb);
+    main.append(t, ml);
+    if (ui.filling.has(id)) main.append(el("span", "drafted", "Claude is filling in the details…"));
+    const night = el("div", "dbnight" + (m.night ? "" : " none"), m.night ? shortDate(m.night) : "Not scheduled");
+    const stars = el("div", "dbstars"); stars.append(starsEl(id, "db"), seenBox(id, "db"));
+    const act = el("div", "dbact");
+    const rm = el("button", "removebtn", "Remove"); rm.type = "button"; rm.id = "rm-" + id; rm.dataset.action = "remove"; rm.dataset.id = id; rm.disabled = !canWrite();
+    act.append(rm);
+    row.append(watchBox(id, "db"), main, night, stars, act);
+    if (ui.confirmRemove === id) {
+      const c = el("div", "confirm");
+      c.append(el("span", null, "Remove “" + m.title + "” from the list? Its stars and checkmark go too."));
+      const yes = el("button", "btn small", "Remove"); yes.type = "button"; yes.id = "rmy-" + id; yes.dataset.action = "remove-yes"; yes.dataset.id = id;
+      const no = el("button", "btn small ghost", "Keep"); no.type = "button"; no.dataset.action = "remove-no";
+      c.append(yes, no); row.append(c);
+    }
+    listEl.append(row);
+  }
+}
+
+/* ================= builder ================= */
+function builderSettings() { return { start: B.start, end: B.end, doubles: B.doubles }; }
+function catalogFiltered() {
+  const q = B.q.trim().toLowerCase();
+  return [...catalog.values()].filter(m => (!B.family || !isMature(m)) && (!q || [m.title, m.director, ...(m.cast || [])].join(" ").toLowerCase().includes(q)))
+    .sort((a, b) => String(a.title).replace(/^(the|a|an) /i, "").localeCompare(String(b.title).replace(/^(the|a|an) /i, "")));
+}
+function renderBuilder() {
+  $("ownerNote").hidden = ctx.role !== "owner";
+  $("buildTitle").textContent = ctx.role === "owner" ? "Make a list" : (hasList() ? "Rebuild your countdown" : "Make your own countdown");
+  if (!B.start) B.start = TODAY < SEASON_FIRST ? SEASON_FIRST : TODAY > "2026-12-24" ? "2026-12-24" : TODAY;
+  $("bStart").value = B.start; $("bEnd").value = B.end; $("bDoubles").value = B.doubles;
+  $("bFamily").checked = B.family;
+  const s = builderSettings();
+  const valid = B.start <= B.end;
+  const nights = valid ? nightsBetween(B.start, B.end).length : 0;
+  const cap = valid ? capacityOf(s) : 0;
+  const capLine = $("capLine"); capLine.textContent = "";
+  if (!valid) capLine.append("Your first night has to come before your last night.");
+  else { capLine.append(el("strong", null, String(nights)), nights === 1 ? " night · room for " : " nights · room for ", el("strong", null, String(cap)), " movies" + (cap > nights ? " with double features" : "")); }
+  const pool = [...catalog.values()].filter(m => !B.family || !isMature(m)).length + B.own.size;
+  if (!B.touchedCount) B.count = Math.max(1, Math.min(cap || 1, pool));
+  $("bCount").value = B.count; $("bCount").max = String(pool);
+  $("countHint").textContent = "Pick at random fills your list with that many movies" + (B.family ? " from the family-friendly ones" : "") + ". Check or uncheck any movie to fine-tune.";
+  // catalog
+  const host = $("bCatalog"); host.textContent = "";
+  const rows = catalogFiltered();
+  const ownRows = [...B.own.entries()];
+  if (!rows.length && !ownRows.length) host.append(el("p", "empty", "No movies match."));
+  const addRow = (id, m, own) => {
+    const on = B.picked.has(id);
+    const row = el("div", "cat-row" + (on ? "" : " off"));
+    const box = el("input", "watch"); box.type = "checkbox"; box.id = "pk-" + id; box.checked = on; box.dataset.action = "pick"; box.dataset.id = id;
+    box.setAttribute("aria-label", "Pick " + m.title);
+    const body = el("div", "body");
+    const tr = el("div", "title-row");
+    const t = el("button", "titlebtn", m.title); t.type = "button"; t.dataset.action = "open"; t.dataset.id = id; t.dataset.from = own ? "own" : "catalog"; t.id = "o-pk-" + id;
+    tr.append(t, metaLine(m));
+    const rb = rtBadge(m); if (rb) tr.append(rb);
+    const h = HOLIDAYS[m.tag]; if (h) tr.append(el("span", "chip", h.chip));
+    if (own) tr.append(el("span", "chip", "Added by you"));
+    body.append(tr);
+    if (m.synopsis) body.append(el("p", "syn", m.synopsis));
+    const svc = (m.sub || []).concat((m.free || []).map(x => x + " (free)"));
+    if (svc.length) body.append(el("p", "svc-line", "Streaming on " + svc.join(", ")));
+    row.append(box, body); host.append(row);
+  };
+  ownRows.forEach(([id, m]) => addRow(id, m, true));
+  rows.forEach(m => addRow(m.id, m, false));
+  // summary bar
+  const n = B.picked.size;
+  const sum = $("bSummary"); sum.textContent = ""; sum.className = "";
+  let ok = valid && n > 0 && n <= cap;
+  if (!n) sum.append("Pick some movies, or let Pick at random do it.");
+  else if (n > cap) { sum.className = "warn"; sum.append(n + " movies won't fit in " + cap + " spots. Add double features, end on New Year's Eve, or unpick " + (n - cap) + "."); }
+  else { const s1 = el("strong", null, n + (n === 1 ? " movie" : " movies")); sum.append(s1, " over " + nights + " nights" + (n < nights ? " · some nights off" : n > nights ? " · " + (n - nights) + " double features" : " · one a night")); }
+  const btn = $("bBuild");
+  btn.disabled = !ok || (ctx.role !== "owner" && !canWrite());
+  btn.textContent = ctx.role === "owner" ? "Preview a schedule" : hasList() ? "Rebuild my schedule" : "Make my schedule";
+  renderPreview();
+}
+function renderPreview() {
+  const host = $("bPreview"); host.textContent = "";
+  if (!B.preview) { host.hidden = true; return; }
+  host.hidden = false;
+  host.append(el("h3", null, "Preview"), el("p", "hint", "Here's how that list would play out. Nothing was saved."));
+  const entries = Object.entries(B.preview.items).map(([id, it]) => [id, { ...(catalog.get(id) || B.own.get(id) || { title: id }), night: it.night, slot: it.slot, note: it.note }])
+    .sort((a, b) => (a[1].night || "9999").localeCompare(b[1].night || "9999") || a[1].slot - b[1].slot);
+  const nights = nightsBetween(B.preview.settings.start, B.preview.settings.end);
+  scheduleInto(host, groupByNight(entries, nights), nights, true, "pv");
+}
+function pickRandom() {
+  const pool = [...catalog.values()].filter(m => !B.family || !isMature(m)).map(m => m.id).concat([...B.own.keys()]);
+  const n = Math.max(1, Math.min(Number(B.count) || 1, pool.length));
+  B.picked = new Set(shuffle(pool).slice(0, n));
+  B.preview = null;
+}
+async function buildNow() {
+  const s = builderSettings();
+  if (ctx.role === "owner") {
+    B.preview = { settings: s, items: buildSchedule([...B.picked], s) };
+    render();
+    requestAnimationFrame(() => { const p = $("bPreview"); if (p) p.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    return;
+  }
+  const prev = P || {};
+  const keep = {}; // watched movies stay on the night they were watched
+  for (const id of B.picked) if (prev.watched && prev.watched[id] && prev.items && prev.items[id]) keep[id] = prev.items[id];
+  const toPlace = [...B.picked].filter(id => !keep[id]);
+  const placed = buildSchedule(toPlace, s, Object.values(keep).map(x => x.night));
+  const custom = {};
+  for (const id of B.picked) { if (B.own.has(id)) custom[id] = (prev.custom && prev.custom[id]) || B.own.get(id); else if (prev.custom && prev.custom[id]) custom[id] = prev.custom[id]; }
+  const watched = {}, ratings = {};
+  for (const id of B.picked) { if (prev.watched && prev.watched[id]) watched[id] = true; if (prev.ratings && prev.ratings[id]) ratings[id] = prev.ratings[id]; }
+  P = { v: 1, settings: s, items: { ...placed, ...keep }, custom, watched, ratings, createdOn: prev.createdOn || TODAY, updatedOn: TODAY };
+  loadPersonalIntoL();
+  await savePersonal();
+  location.hash = "#schedule";
+  render();
+  const blanks = [...B.picked].filter(id => custom[id] && !custom[id].synopsis);
+  for (const id of blanks) { if (!ctx.sample) break; await fillDetails(id); }
+}
+function openBuilderFromList() { B.seeded = true; seedBuilderFromList(); location.hash = "#build"; }
+function seedBuilderFromList() {
+  if (P) {
+    B.start = TODAY > P.settings.end ? P.settings.start : (TODAY < P.settings.start ? P.settings.start : TODAY);
+    B.end = P.settings.end; B.doubles = P.settings.doubles;
+    B.picked = new Set(Object.keys(P.items));
+    B.own = new Map(Object.entries(P.custom || {}).filter(([id]) => !catalog.has(id)));
+    B.touchedCount = true; B.count = B.picked.size;
+  }
+}
+
+/* ================= sheets: VHS details + night editor ================= */
+function svcRow(label, items, free) { const row = el("div", "svc-row"); row.append(el("span", "svc-label", label)); items.forEach(x => row.append(el("span", "svc" + (free ? " free" : ""), x))); return row; }
+function sheetMovie() {
+  if (!ui.sheet) return null;
+  const { id, from } = ui.sheet;
+  if (from === "list") return L.movies.get(id) || null;
+  return catalog.get(id) || B.own.get(id) || null;
+}
+function barcodeEl(id) {
+  const NS = "http://www.w3.org/2000/svg";
+  const box = el("div", "barcode");
+  const svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", "0 0 116 38"); svg.setAttribute("aria-hidden", "true");
+  let h = hashStr(id + "bars"), x = 2;
+  while (x < 112) {
+    h = Math.imul(h ^ (h >>> 13), 2654435761) >>> 0;
+    const w = 1 + (h % 3), gap = 1 + ((h >>> 5) % 2);
+    const r = document.createElementNS(NS, "rect"); r.setAttribute("x", x); r.setAttribute("y", 0); r.setAttribute("width", w); r.setAttribute("height", 38); r.setAttribute("fill", "#000");
+    svg.append(r); x += w + gap;
+  }
+  const num = String(hashStr(id)).padStart(10, "0").slice(-10);
+  box.append(svg, el("span", null, "0 " + num.slice(0, 5) + " " + num.slice(5) + " 6"));
+  return box;
+}
+const RATING_TEXT = { "G": "General audiences", "PG": "Parental guidance suggested", "PG-13": "Parents strongly cautioned", "R": "Restricted", "NC-17": "Adults only", "NR": "Not rated", "TV-MA": "Mature audiences", "TV-14": "Parents strongly cautioned", "TV-PG": "Parental guidance suggested", "TV-G": "General audience" };
+function renderSheet() {
+  const back = $("sheetBack"), sheet = $("sheet");
+  if (ui.night) { renderNightSheet(); return; }
+  const m = sheetMovie();
+  if (!m) { back.hidden = true; sheet.textContent = ""; sheet.className = "sheet"; return; }
+  const { id, from } = ui.sheet;
+  back.hidden = false; sheet.textContent = ""; sheet.className = "sheet vhs";
+  const top = el("div", "vhs-top");
+  top.append(el("span", "vhs-logo", "VHS"), el("span", "vhs-cat", "XMAS-" + String(1000 + hashStr(id) % 9000)));
+  const close = el("button", "closebtn", "×"); close.type = "button"; close.id = "sheetClose"; close.dataset.action = "close"; close.setAttribute("aria-label", "Close");
+  top.append(close); sheet.append(top);
+  const body = el("div", "vhs-body");
+  const title = el("h2", "vhs-title", m.title); title.id = "sheetTitle"; body.append(title);
+  const tl = [];
+  if (from === "list" && m.note) tl.push(m.note); else if (from !== "list" && HOLIDAYS[m.tag]) tl.push(HOLIDAYS[m.tag].chip);
+  if (from === "list") tl.push(m.night ? "Your night: " + shortDate(m.night) : "Not on a night yet");
+  body.append(el("p", "vhs-tagline", tl.join(" · ")));
+  if (from === "list" && ui.editing === id) { body.append(editForm(id, m)); sheet.append(body); return; }
+
+  const grid = el("div", "vhs-grid");
+  const cv = el("div", "vhs-cover"); cv.append(coverEl(id, m, { lg: true })); grid.append(cv);
+  const blurb = el("div", "vhs-blurb");
+  blurb.append(m.synopsis ? el("p", "vhs-syn", m.synopsis) : el("p", "fine", "No synopsis yet."));
+  if (m.drafted) blurb.append(el("p", "drafted", "Details filled in by Claude. Give them a quick check with Edit details."));
+  const hasRt = !(m.rt === null || m.rt === undefined || m.rt === "");
+  const cr = el("div", "critics" + (!hasRt ? " none" : Number(m.rt) < 60 ? " rotten" : ""));
+  cr.append(el("span", "pct", hasRt ? (m.rtEstimated ? "~" : "") + m.rt + "%" : "No score"));
+  const lab = el("span", "lab");
+  lab.append(el("b", null, "Rotten Tomatoes"), hasRt ? (Number(m.rt) >= 60 ? "Fresh" : "Rotten") + (m.rtEstimated ? " · Claude's estimate" : "") : "Not enough reviews", el("br"));
+  const ra = el("a", null, "See reviews"); ra.href = "https://www.rottentomatoes.com/search?search=" + encodeURIComponent(m.title); ra.target = "_blank"; ra.rel = "noopener";
+  lab.append(ra); cr.append(lab); blurb.append(cr);
+  grid.append(blurb); body.append(grid);
+
+  if (from === "list") {
+    const st = el("div", "sticker");
+    const sh = el("div", "sticker-h"); sh.append(el("span", null, "Your copy"), el("span", null, "Be kind · rewind")); st.append(sh);
+    const r1 = el("div", "row2");
+    const wl = el("label", "check"); wl.append(watchBox(id, "sh"), el("span", null, L.watched.has(id) ? "Watched" : "Mark as watched"));
+    r1.append(wl, seenBox(id, "sh"));
+    st.append(r1);
+    const r2 = el("div", "row2"); r2.append(starsEl(id, "sh", true));
+    if (L.ratings.get(id) && canWrite()) { const clr = el("button", "linkish", "Clear stars"); clr.type = "button"; clr.dataset.action = "clear-stars"; clr.dataset.id = id; r2.append(clr); }
+    st.append(r2);
+    const nf = el("div", "field");
+    const nl = el("label", null, "Night"); nl.htmlFor = "sheetNight";
+    const ns = el("select", "input"); ns.id = "sheetNight"; ns.dataset.id = id; ns.disabled = !canWrite();
+    nightOptions(ns, m.night, false);
+    nf.append(nl, ns); st.append(nf);
+    body.append(st);
+  }
+
+  const av = el("div", "avail"); av.append(el("h3", null, "Available on"));
+  const sub = m.sub || [], free = m.free || [];
+  if (sub.length) av.append(svcRow("Included with", sub, false));
+  if (free.length) av.append(svcRow("Free with ads", free, true));
+  if (!sub.length && !free.length) av.append(el("p", "fine", m.streamCheckedOn ? "Not on a subscription or free service right now. It's usually available to rent or buy." : "Streaming not looked up yet."));
+  const jw = el("p", "fine");
+  if (m.streamCheckedOn) jw.append("US availability checked " + MON[dateOf(m.streamCheckedOn).getMonth()] + " " + dateOf(m.streamCheckedOn).getDate() + ". ");
+  const a = el("a", null, "See today's options on JustWatch"); a.href = "https://www.justwatch.com/us/search?q=" + encodeURIComponent(m.title); a.target = "_blank"; a.rel = "noopener";
+  jw.append(a); av.append(jw); body.append(av);
+
+  if (m.director || (m.cast && m.cast.length)) {
+    const bl = el("p", "billing");
+    if (m.cast && m.cast.length) { bl.append(el("small", null, "Starring")); m.cast.forEach((c, i) => { if (i) bl.append(" · "); bl.append(el("b", null, c)); }); }
+    if (m.director) { if (m.cast && m.cast.length) bl.append(el("br")); bl.append(el("small", null, "Directed by"), el("b", null, m.director)); }
+    body.append(bl);
+  }
+  const foot = el("div", "vhs-foot");
+  const mp = el("div", "mpaa"); const r = String(m.mpaa || "NR").toUpperCase();
+  mp.append(el("b", null, r), el("span", null, (RATING_TEXT[r] || "Rated") + (m.mature && r === "NR" ? ". Adult content" : "")));
+  const sp = el("div", "specs");
+  if (m.runtime) { const x = el("span"); x.append(el("b", null, String(m.runtime)), " min."); sp.append(x); }
+  if (m.year) sp.append(el("span", null, "© " + m.year));
+  foot.append(mp, sp, barcodeEl(id)); body.append(foot);
+
+  const actions = el("div", "vhs-actions");
+  if (from === "list") {
+    const ed = el("button", "btn ghost small", "Edit details"); ed.type = "button"; ed.id = "editBtn"; ed.dataset.action = "edit"; ed.dataset.id = id; ed.disabled = !canWrite(); actions.append(ed);
+    const missing = !m.synopsis || !m.director || !(m.cast && m.cast.length) || !m.year;
+    if (ctx.sample && canWrite()) { const fill = el("button", "btn ghost small", ui.filling.has(id) ? "Filling in…" : missing ? "Fill in details with Claude" : "Refresh details with Claude"); fill.type = "button"; fill.dataset.action = "fill"; fill.dataset.id = id; fill.disabled = ui.filling.has(id); actions.append(fill); }
+  } else if (location.hash === "#build") {
+    const on = B.picked.has(id);
+    const pk = el("button", on ? "btn ghost small" : "btn gold small", on ? "Remove from my picks" : "Add to my picks"); pk.type = "button"; pk.dataset.action = "sheet-pick"; pk.dataset.id = id; actions.append(pk);
+  }
+  if (actions.children.length) body.append(actions);
+  sheet.append(body);
+}
+function editForm(id, m) {
+  const f = el("form", "edit-grid"); f.id = "editForm"; f.dataset.id = id;
+  const add = (fid, label, value, o = {}) => {
+    const wrap = el("div", "field" + (o.full ? " full" : ""));
+    const l = el("label", null, label); l.htmlFor = fid;
+    const i = el(o.area ? "textarea" : "input", "input"); i.id = fid; i.name = fid;
+    if (o.area) i.rows = 4;
+    i.value = value == null ? "" : value;
+    if (o.placeholder) i.placeholder = o.placeholder;
+    if (o.required) i.required = true;
+    if (o.numeric) i.inputMode = "numeric";
+    wrap.append(l, i); f.append(wrap);
+  };
+  add("e-title", "Title", m.title, { full: true, required: true });
+  add("e-year", "Year", m.year || "", { placeholder: "1990", numeric: true });
+  add("e-mpaa", "Parental rating", m.mpaa || "", { placeholder: "PG, PG-13, R, NR…" });
+  add("e-rt", "Rotten Tomatoes %", m.rt ?? "", { placeholder: "85", numeric: true });
+  add("e-runtime", "Runtime (minutes)", m.runtime || "", { placeholder: "97", numeric: true });
+  add("e-director", "Director", m.director || "", { full: true });
+  add("e-cast", "Cast (separate with commas)", (m.cast || []).join(", "), { full: true });
+  add("e-synopsis", "Synopsis (no spoilers)", m.synopsis || "", { full: true, area: true });
+  add("e-sub", "Streaming services (commas)", (m.sub || []).join(", "), { full: true, placeholder: "Netflix, Hulu" });
+  add("e-free", "Free with ads (commas)", (m.free || []).join(", "), { full: true, placeholder: "Tubi, Pluto TV" });
+  add("e-note", "Holiday note (optional)", m.note || "", { full: true, placeholder: "Christmas Eve" });
+  if (ctx.assets && L.kind === "owner") {
+    const wrap = el("div", "field full");
+    const l = el("label", null, "Poster image"); l.htmlFor = "e-poster";
+    const line = el("div", "posterline");
+    const i = el("input"); i.type = "file"; i.accept = "image/*"; i.id = "e-poster"; i.dataset.id = id;
+    line.append(i);
+    if (m.posterId) { const rm = el("button", "btn ghost small", "Use the generated cover"); rm.type = "button"; rm.dataset.action = "poster-clear"; rm.dataset.id = id; line.append(rm); }
+    wrap.append(l, line, el("p", "fine", ui.uploading ? "Uploading…" : "Optional. Without one, the movie gets a generated cover."));
+    f.append(wrap);
+  }
+  const foot = el("div", "sheet-actions full");
+  const save = el("button", "btn small", "Save details"); save.type = "submit";
+  const cancel = el("button", "btn ghost small", "Cancel"); cancel.type = "button"; cancel.dataset.action = "edit-cancel";
+  foot.append(save, cancel); f.append(foot);
+  return f;
+}
+function nightLabel(n) { return n ? shortDate(n) : "Not scheduled"; }
+function renderNightSheet() {
+  const back = $("sheetBack"), sheet = $("sheet");
+  const N = ui.night, n = N.night, d = dateOf(n), nights = listNights();
+  const hadSearch = document.activeElement && document.activeElement.id === "pickSearch";
+  back.hidden = false; sheet.className = "sheet"; sheet.textContent = "";
+  sheet.append(el("div", "sheet-top"));
+  const inner = el("div", "sheet-in");
+  const h = el("div", "sheet-h");
+  const t = el("h2", null, DOW_LONG[d.getDay()] + ", " + MON[d.getMonth()] + " " + d.getDate()); t.id = "sheetTitle";
+  const close = el("button", "closebtn", "×"); close.type = "button"; close.id = "sheetClose"; close.dataset.action = "close"; close.setAttribute("aria-label", "Close");
+  h.append(t, close); inner.append(h);
+  inner.append(el("span", "ns-sub", "Night " + (nights.indexOf(n) + 1) + " of " + nights.length + (n === TODAY ? " · Tonight" : "")));
+  const films = sortedList().filter(([, m]) => m.night === n);
+  const list = el("div", "ns-list");
+  if (!films.length) list.append(el("div", "ns-empty", "No movie on this night."));
+  for (const [id, m] of films) {
+    const row = el("div", "ns-row");
+    const info = el("div");
+    info.append(el("div", "t", m.title));
+    const sub = [m.year, m.mpaa].filter(Boolean).join(" · ") + (L.watched.has(id) ? " · Watched" : "");
+    info.append(el("div", "s", sub));
+    const btns = el("div", "ns-btns");
+    const sw = el("button", "btn ghost small", "Swap"); sw.type = "button"; sw.dataset.action = "swap-start"; sw.dataset.id = id; sw.id = "sw-" + id;
+    const off = el("button", "btn ghost small", "Take off"); off.type = "button"; off.dataset.action = "takeoff"; off.dataset.id = id; off.id = "to-" + id;
+    btns.append(sw, off);
+    row.append(coverEl(id, m), info, btns);
+    list.append(row);
+  }
+  inner.append(list);
+  if (!N.mode) {
+    const add = el("button", "btn gold small", films.length ? "Add another movie" : "Add a movie"); add.type = "button"; add.dataset.action = "add-start"; add.id = "addStart"; add.style.justifySelf = "start";
+    inner.append(add);
+    inner.append(el("p", "fine", "Swap trades nights: the movie you pick comes here and this one takes its old night. Take off moves a movie to Not scheduled so you can give it another night later. Nights can hold as many movies as you like."));
+  } else {
+    const pk = el("div", "picker");
+    const ph = el("div", "sheet-h");
+    ph.append(el("h3", null, N.mode === "swap" ? "Swap “" + titleOf(N.target) + "” with…" : "Add a movie to " + shortDate(n)));
+    const cancel = el("button", "linkish", "Cancel"); cancel.type = "button"; cancel.dataset.action = "pick-cancel"; ph.append(cancel);
+    pk.append(ph);
+    const q = el("input", "input"); q.type = "search"; q.id = "pickSearch"; q.placeholder = "Search your movies"; q.value = N.q || ""; q.setAttribute("aria-label", "Search your movies");
+    pk.append(q);
+    const pl = el("div", "pick-list");
+    const qq = (N.q || "").trim().toLowerCase();
+    const cands = sortedList().filter(([, m]) => m.night !== n).filter(([, m]) => !qq || [m.title, ...(m.cast || [])].join(" ").toLowerCase().includes(qq));
+    const groups = [["Not scheduled", cands.filter(([, m]) => !m.night)], ["Coming up", cands.filter(([, m]) => m.night && m.night >= TODAY)], ["Earlier nights", cands.filter(([, m]) => m.night && m.night < TODAY)]];
+    let any = false;
+    for (const [label, rows] of groups) {
+      if (!rows.length) continue;
+      any = true;
+      pl.append(el("div", "pick-group", label));
+      for (const [id, m] of rows) {
+        const b = el("button", "pick-row"); b.type = "button"; b.dataset.action = "pick-movie"; b.dataset.id = id;
+        const tt = el("span", "t", m.title);
+        b.append(coverEl(id, m), tt, el("span", "w", nightLabel(m.night) + (L.watched.has(id) ? " · ✓" : "")));
+        pl.append(b);
+      }
+    }
+    if (!any) pl.append(el("p", "fine", qq ? "No movies match." : "Every movie on your list is already on this night."));
+    pk.append(pl);
+    inner.append(pk);
+  }
+  sheet.append(inner);
+  if (hadSearch) { const q = $("pickSearch"); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+}
+function openSheet(id, from, opener) {
+  ui.night = null; ui.sheet = { id, from: from || "list" }; ui.editing = null;
+  sheetOpener = opener || null;
+  renderSheet();
+  const c = $("sheetClose"); if (c) c.focus();
+}
+function openNight(night, opener) {
+  ui.sheet = null; ui.editing = null; ui.night = { night, mode: null, target: null, q: "" };
+  sheetOpener = opener || null;
+  renderSheet();
+  const c = $("sheetClose"); if (c) c.focus();
+}
+function closeSheet() {
+  ui.sheet = null; ui.editing = null; ui.night = null;
+  renderSheet();
+  if (sheetOpener && document.contains(sheetOpener)) sheetOpener.focus();
+  sheetOpener = null;
+}
+function moveNight(id, night) { return updateMovie(id, { night: night || null, slot: night ? nextSlot(night) : 0, note: "" }); }
+function swapNights(a, b) {
+  const ma = L.movies.get(a), mb = L.movies.get(b);
+  if (!ma || !mb) return;
+  const na = ma.night || null, nb = mb.night || null, sa = ma.slot || 0, sb = mb.slot || 0;
+  updateMovie(a, { night: nb, slot: sb, note: "" });
+  updateMovie(b, { night: na, slot: sa, note: "" });
+}
+
+/* ================= render all ================= */
+let renderQueued = false;
+function render() {
+  if (renderQueued) return;
+  renderQueued = true;
+  requestAnimationFrame(() => {
+    renderQueued = false;
+    const focusId = document.activeElement && document.activeElement.id;
+    const groups = groupByNight(sortedList(), listNights());
+    renderStats(); renderLights(); renderTonight(groups); renderWeeks(groups); renderDb(); renderBuilder();
+    if (hasList()) nightOptions($("addNight"), undefined, true);
+    if (ui.night) renderNightSheet();
+    else if (ui.sheet && ui.editing !== ui.sheet.id) renderSheet();
+    if (ui.sheet && !sheetMovie()) closeSheet();
+    $("autoWrap").hidden = !ctx.sample;
+    if (focusId && !["dbSearch", "addTitle", "addYear", "bSearch", "bCount", "bOwnTitle", "bStart", "pickSearch"].includes(focusId)) {
+      const n = document.getElementById(focusId);
+      if (n && n !== document.activeElement) n.focus({ preventScroll: true });
+    }
+  });
+}
+
+/* ================= storage + writes ================= */
+function setNote(t) { $("syncNote").textContent = t || ""; }
+function canWrite() { return L.kind === "owner" ? (ctx.role === "owner" && !!ctx.db && !ctx.readOnly) : L.kind === "personal" ? ctx.store !== null || ctx.role === "guest" : false; }
+
+// Owner list: shared database documents.
+const chains = new Map();
+function queue(key, fn) { const next = (chains.get(key) || Promise.resolve()).then(fn).catch(onWriteError); chains.set(key, next); return next; }
+function onWriteError(e) {
+  const code = e && e.code;
+  if (code === "invalid_argument" || code === "revoked") { ctx.readOnly = true; setNote("You can view this list, but only its owner can change it."); }
+  else if (code === "quota_exceeded") setNote("The database is full. Remove a movie before adding another.");
+  else setNote("That change didn't save. Try again in a moment.");
+  render();
+}
+
+// Visitor list: one document in their private space when they have one, otherwise this browser.
+function loadPersonalIntoL() {
+  L.kind = "personal"; L.loaded = true;
+  if (!P) { L.movies = new Map(); L.watched = new Set(); L.ratings = new Map(); L.seen = new Set(); L.settings = { start: SEASON_FIRST, end: "2026-12-25", doubles: "sat" }; return; }
+  L.settings = P.settings;
+  const mv = new Map();
+  for (const [id, it] of Object.entries(P.items || {})) {
+    const base = (P.custom && P.custom[id]) || catalog.get(id) || { title: id };
+    mv.set(id, { ...base, night: it.night || null, slot: it.slot || 0, note: it.note || "" });
+  }
+  L.movies = mv;
+  L.watched = new Set(Object.keys(P.watched || {}).filter(id => P.watched[id] && mv.has(id)));
+  L.seen = new Set(Object.keys(P.seen || {}).filter(id => P.seen[id] && mv.has(id)));
+  L.ratings = new Map(Object.entries(P.ratings || {}).filter(([id, v]) => mv.has(id) && v >= 0.5 && v <= 5).map(([id, v]) => [id, Number(v)]));
+}
+let saveChain = Promise.resolve(), saveTimer = null;
+function savePersonal() {
+  clearTimeout(saveTimer);
+  P.updatedOn = TODAY;
+  const snapshot = JSON.parse(JSON.stringify(P));
+  saveChain = saveChain.then(async () => {
+    if (ctx.db && ctx.uid && ctx.store !== "local" && ctx.store !== "memory") {
+      try { await ctx.db.doc("data/users/" + ctx.uid + "/countdown").set(snapshot); ctx.store = "account"; storageNote(); return; }
+      catch (e) { ctx.store = "local"; }
+    }
+    try { localStorage.setItem(LS_KEY, JSON.stringify(snapshot)); ctx.store = "local"; }
+    catch (e) { ctx.store = "memory"; }
+    storageNote();
+  });
+  return saveChain;
+}
+function savePersonalSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(savePersonal, 350); }
+function storageNote() {
+  if (L.kind !== "personal" || !P) return;
+  setNote(ctx.store === "account" ? "Your list is saved to your Claude account." :
+    ctx.store === "local" ? "Your list is saved in this browser. Open the page on this same device to keep it going." :
+    ctx.store === "memory" ? "This browser won't let the page save, so your list lasts until you close it." : "");
+}
+
+const ratingTimers = new Map();
+function toggleWatched(id, on) {
+  if (!canWrite()) return;
+  if (on) L.watched.add(id); else L.watched.delete(id);
+  render();
+  if (L.kind === "personal") { P.watched = P.watched || {}; if (on) P.watched[id] = true; else delete P.watched[id]; savePersonalSoon(); return; }
+  queue("watched/" + id, async () => {
+    const ref = ctx.db.collection("watched").doc(id);
+    try { if (on) await ref.set({ watched: true, title: titleOf(id), checkedOn: TODAY }); else await ref.delete(); }
+    catch (e) { if (on) L.watched.delete(id); else L.watched.add(id); throw e; }
+  });
+}
+function toggleSeen(id, on) {
+  if (!canWrite()) return;
+  if (on) L.seen.add(id); else L.seen.delete(id);
+  render();
+  if (L.kind === "personal") { P.seen = P.seen || {}; if (on) P.seen[id] = true; else delete P.seen[id]; savePersonalSoon(); return; }
+  queue("seen/" + id, async () => {
+    const ref = ctx.db.collection("seen").doc(id);
+    try { if (on) await ref.set({ seen: true, title: titleOf(id) }); else await ref.delete(); }
+    catch (e) { if (on) L.seen.delete(id); else L.seen.add(id); throw e; }
+  });
+}
+function setRating(id, v, debounce) {
+  if (!canWrite()) return;
+  const prev = L.ratings.get(id) || 0;
+  v = Math.round(Math.max(0, Math.min(5, v)) * 2) / 2;
+  if (v) L.ratings.set(id, v); else L.ratings.delete(id);
+  render();
+  if (L.kind === "personal") { P.ratings = P.ratings || {}; if (v) P.ratings[id] = v; else delete P.ratings[id]; savePersonalSoon(); return; }
+  const write = () => queue("ratings/" + id, async () => {
+    const val = L.ratings.get(id) || 0;
+    const ref = ctx.db.collection("ratings").doc(id);
+    try { if (val) await ref.set({ stars: val, title: titleOf(id), ratedOn: TODAY }); else await ref.delete(); }
+    catch (e) { if (prev) L.ratings.set(id, prev); else L.ratings.delete(id); throw e; }
+  });
+  clearTimeout(ratingTimers.get(id));
+  if (debounce) ratingTimers.set(id, setTimeout(write, 450)); else write();
+}
+const DETAIL_KEYS = ["title", "year", "mpaa", "director", "cast", "synopsis", "sub", "free", "streamCheckedOn", "drafted", "rt", "rtEstimated", "runtime", "posterId"];
+function updateMovie(id, patch) {
+  if (!canWrite()) return Promise.resolve();
+  const prev = L.movies.get(id);
+  if (!prev) return Promise.resolve();
+  L.movies.set(id, { ...prev, ...patch });
+  render();
+  if (L.kind === "personal") {
+    const it = P.items[id] || (P.items[id] = {});
+    for (const k of ["night", "slot", "note"]) if (k in patch) it[k] = patch[k];
+    const det = DETAIL_KEYS.filter(k => k in patch);
+    if (det.length) {
+      P.custom = P.custom || {};
+      const base = P.custom[id] || { ...(catalog.get(id) || {}) };
+      for (const k of det) base[k] = patch[k];
+      P.custom[id] = base;
+    }
+    savePersonalSoon();
+    return Promise.resolve();
+  }
+  return queue("movies/" + id, async () => {
+    try { await ctx.db.collection("movies").doc(id).update(patch); }
+    catch (e) { L.movies.set(id, prev); throw e; }
+  });
+}
+function nextSlot(night) { let max = -1; for (const [, m] of L.movies) if (night && m.night === night) max = Math.max(max, m.slot ?? 0); return max + 1; }
+function removeMovie(id) {
+  if (!canWrite()) return;
+  const prev = L.movies.get(id), hadW = L.watched.has(id), hadR = L.ratings.get(id), hadS = L.seen.has(id);
+  L.movies.delete(id); L.watched.delete(id); L.ratings.delete(id); L.seen.delete(id);
+  ui.confirmRemove = null;
+  if (ui.sheet && ui.sheet.id === id) closeSheet();
+  render();
+  if (L.kind === "personal") { delete P.items[id]; if (P.watched) delete P.watched[id]; if (P.ratings) delete P.ratings[id]; if (P.seen) delete P.seen[id]; if (P.custom && !catalog.has(id)) delete P.custom[id]; savePersonalSoon(); return; }
+  queue("movies/" + id, async () => {
+    try { await ctx.db.collection("movies").doc(id).delete(); }
+    catch (e) { L.movies.set(id, prev); if (hadW) L.watched.add(id); if (hadR) L.ratings.set(id, hadR); throw e; }
+  });
+  if (hadW) queue("watched/" + id, () => ctx.db.collection("watched").doc(id).delete());
+  if (hadR) queue("ratings/" + id, () => ctx.db.collection("ratings").doc(id).delete());
+  if (hadS) queue("seen/" + id, () => ctx.db.collection("seen").doc(id).delete());
+}
+async function addMovie(title, year, night, auto) {
+  if (L.kind === "personal") {
+    const match = [...catalog.values()].find(m => m.title.toLowerCase() === title.toLowerCase());
+    if (match && L.movies.has(match.id)) return { already: match.title };
+    let id = match ? match.id : "c-" + slugify(title), i = 2;
+    while (!match && (L.movies.has(id) || catalog.has(id))) id = "c-" + slugify(title) + "-" + i++;
+    const base = match || { title, year: year || null, mpaa: "", director: "", cast: [], synopsis: "", sub: [], free: [], rt: null, runtime: null };
+    P.items[id] = { night: night || null, slot: nextSlot(night), note: "" };
+    if (!match) { P.custom = P.custom || {}; P.custom[id] = base; }
+    L.movies.set(id, { ...base, night: night || null, slot: P.items[id].slot, note: "" });
+    render();
+    await savePersonal();
+    if (!match && auto && ctx.sample) fillDetails(id);
+    return { id, fromCatalog: !!match };
+  }
+  let id = slugify(title), i = 2;
+  while (L.movies.has(id)) id = slugify(title) + "-" + i++;
+  const doc = { title, year: year || null, mpaa: "", director: "", cast: [], synopsis: "", sub: [], free: [], rt: null, runtime: null, night: night || null, slot: nextSlot(night), note: "", addedOn: TODAY };
+  L.movies.set(id, doc); render();
+  await queue("movies/" + id, async () => {
+    try { await ctx.db.collection("movies").doc(id).set(doc); }
+    catch (e) { L.movies.delete(id); throw e; }
+  });
+  if (auto && ctx.sample && L.movies.has(id)) fillDetails(id);
+  return { id };
+}
+
+/* ================= Claude fill-in ================= */
+async function fillDetails(id) {
+  const m = L.movies.get(id);
+  if (!m || !ctx.sample || ui.filling.has(id)) return;
+  ui.filling.add(id); render();
+  const prompt = 'You are filling in a family movie-night list. For the movie "' + m.title + '"' + (m.year ? " (" + m.year + ")" : "") +
+    ', reply with only a JSON object in this shape: {"year": 1990, "mpaa": "PG", "director": "Name", "cast": ["Lead 1", "Lead 2", "Lead 3", "Lead 4"], "synopsis": "One or two sentences about the premise. No spoilers, no reviews.", "runtime": 97, "rt": 85}. ' +
+    '"runtime" is the length in minutes. "rt" is the Rotten Tomatoes Tomatometer percentage as best you know it, or null if you are not reasonably sure. ' +
+    'Use the US MPAA rating (G, PG, PG-13, R or NR; a TV rating like TV-PG for TV or streaming movies). If several films share the title, pick the best-known holiday one. If you do not recognize the movie, reply {"unknown": true}.';
+  try {
+    const r = await ctx.sample.json(prompt, { modelTier: "default" });
+    if (!r || r.unknown) $("addStatus").textContent = "Claude didn't recognize “" + m.title + "”. Open it and use Edit details to add what you know.";
+    else {
+      const patch = { drafted: true };
+      const y = parseInt(r.year, 10); if (y > 1880 && y < 2100) patch.year = m.year || y;
+      if (typeof r.mpaa === "string" && r.mpaa.length < 12) patch.mpaa = r.mpaa.trim();
+      if (typeof r.director === "string") patch.director = r.director.trim().slice(0, 120);
+      if (Array.isArray(r.cast)) patch.cast = r.cast.filter(x => typeof x === "string").slice(0, 5).map(x => x.trim().slice(0, 80));
+      if (typeof r.synopsis === "string") patch.synopsis = r.synopsis.trim().slice(0, 600);
+      const rt = parseInt(r.rt, 10); if (rt >= 0 && rt <= 100 && (m.rt === null || m.rt === undefined || m.rtEstimated)) { patch.rt = rt; patch.rtEstimated = true; }
+      const rn = parseInt(r.runtime, 10); if (rn > 20 && rn < 400 && !m.runtime) patch.runtime = rn;
+      if (L.movies.has(id)) await updateMovie(id, patch);
+      $("addStatus").textContent = "Details for “" + m.title + "” are in. Streaming isn't looked up automatically; use the JustWatch link on its VHS box.";
+    }
+  } catch (e) {
+    const code = e && e.code;
+    if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(code)) { ctx.sample = null; $("addStatus").textContent = "Claude can't fill in details here. Add them yourself with Edit details."; }
+    else if (code === "rate_limited") $("addStatus").textContent = "Claude is busy right now. Try Fill in details again in a bit.";
+    else if (code !== "cancelled") $("addStatus").textContent = "Claude couldn't fill in “" + m.title + "”. Try again from its details.";
+  } finally { ui.filling.delete(id); render(); }
+}
+
+/* ================= events ================= */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-action]");
+  if (!t) { if (e.target === $("sheetBack")) closeSheet(); return; }
+  const a = t.dataset.action, id = t.dataset.id;
+  if (a === "open") openSheet(id, t.dataset.from || "list", t.tagName === "g" ? null : t);
+  else if (a === "close") closeSheet();
+  else if (a === "clear-stars") setRating(id, 0);
+  else if (a === "remove") { ui.confirmRemove = id; render(); requestAnimationFrame(() => requestAnimationFrame(() => { const y = $("rmy-" + id); if (y) y.focus(); })); }
+  else if (a === "remove-no") { const k = ui.confirmRemove; ui.confirmRemove = null; render(); requestAnimationFrame(() => requestAnimationFrame(() => { const b = $("rm-" + k); if (b) b.focus(); })); }
+  else if (a === "remove-yes") removeMovie(id);
+  else if (a === "edit") { ui.editing = id; renderSheet(); const f = $("e-title"); if (f) f.focus(); }
+  else if (a === "edit-cancel") { ui.editing = null; renderSheet(); const b = $("editBtn"); if (b) b.focus(); }
+  else if (a === "fill") fillDetails(id);
+  else if (a === "edit-night") openNight(t.dataset.night, t);
+  else if (a === "add-start") { ui.night.mode = "add"; ui.night.target = null; ui.night.q = ""; renderNightSheet(); const q = $("pickSearch"); if (q) q.focus(); }
+  else if (a === "swap-start") { ui.night.mode = "swap"; ui.night.target = id; ui.night.q = ""; renderNightSheet(); const q = $("pickSearch"); if (q) q.focus(); }
+  else if (a === "pick-cancel") { ui.night.mode = null; renderNightSheet(); }
+  else if (a === "takeoff") { moveNight(id, null); }
+  else if (a === "pick-movie") {
+    const N = ui.night; if (!N) return;
+    if (N.mode === "swap" && N.target) swapNights(N.target, id); else moveNight(id, N.night);
+    N.mode = null; N.target = null; N.q = "";
+    renderNightSheet();
+  }
+  else if (a === "poster-clear") { const old = (L.movies.get(id) || {}).posterId; updateMovie(id, { posterId: null }); if (old && ctx.assets) ctx.assets.delete(old).catch(() => {}); ui.editing = null; renderSheet(); }
+  else if (a === "rebuild") openBuilderFromList();
+  else if (a === "sheet-pick") { if (B.picked.has(id)) B.picked.delete(id); else B.picked.add(id); B.preview = null; render(); renderSheet(); }
+  else if (a === "jump") { const row = $("d-" + TODAY); if (row) row.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }
+});
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.dataset && t.dataset.action === "watch") toggleWatched(t.dataset.id, t.checked);
+  else if (t.dataset && t.dataset.action === "seen") toggleSeen(t.dataset.id, t.checked);
+  else if (t.id === "e-poster" && t.files && t.files[0]) uploadPoster(t.dataset.id, t.files[0]);
+  else if (t.dataset && t.dataset.action === "pick") { if (t.checked) B.picked.add(t.dataset.id); else B.picked.delete(t.dataset.id); B.preview = null; render(); }
+  else if (t.id === "sheetNight") { moveNight(t.dataset.id, t.value || null); }
+  else if (t.id === "dbSort") { try { localStorage.setItem("xmas-sort", t.value); } catch (_) {} renderDb(); }
+  else if (t.id === "bStart") { if (t.value) B.start = t.value < SEASON_FIRST ? SEASON_FIRST : t.value; B.preview = null; render(); }
+  else if (t.id === "bEnd") { B.end = t.value; B.preview = null; render(); }
+  else if (t.id === "bDoubles") { B.doubles = t.value; B.preview = null; render(); }
+  else if (t.id === "bFamily") { B.family = t.checked; if (B.family) for (const id of [...B.picked]) if (isMature(catalog.get(id))) B.picked.delete(id); B.preview = null; render(); }
+  else if (t.id === "bCount") { const n = parseInt(t.value, 10); if (n > 0) { B.count = n; B.touchedCount = true; } render(); }
+});
+document.addEventListener("submit", e => {
+  if (e.target.id !== "editForm") return;
+  e.preventDefault();
+  const f = e.target, id = f.dataset.id, v = k => f.querySelector("#" + k).value.trim();
+  const list = k => v(k).split(",").map(x => x.trim()).filter(Boolean);
+  const y = parseInt(v("e-year"), 10);
+  const cur = L.movies.get(id) || {};
+  const rtv = v("e-rt") === "" ? null : Math.max(0, Math.min(100, parseInt(v("e-rt"), 10)));
+  const rnv = parseInt(v("e-runtime"), 10);
+  const patch = { rt: Number.isNaN(rtv) ? null : rtv, runtime: rnv > 0 ? rnv : null, title: v("e-title") || titleOf(id), year: y > 1880 && y < 2100 ? y : null, mpaa: v("e-mpaa"), director: v("e-director"), cast: list("e-cast"), synopsis: v("e-synopsis"), sub: list("e-sub"), free: list("e-free"), note: v("e-note"), drafted: false };
+  if (String(cur.rt ?? "") !== v("e-rt")) patch.rtEstimated = false; else if (cur.rtEstimated) patch.rtEstimated = true;
+  if (v("e-sub") !== (cur.sub || []).join(", ") || v("e-free") !== (cur.free || []).join(", ")) patch.streamCheckedOn = TODAY;
+  ui.editing = null;
+  updateMovie(id, patch);
+  renderSheet();
+  const b = $("editBtn"); if (b) b.focus();
+});
+$("addForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!canWrite()) { $("addStatus").textContent = ctx.readOnly ? "Only the list's owner can add movies." : "The list isn't ready yet."; return; }
+  const title = $("addTitle").value.trim(); if (!title) return;
+  const y = parseInt($("addYear").value, 10);
+  let night = $("addNight").value;
+  if (night === "auto") night = nextOpenNight();
+  const auto = !!ctx.sample && $("addAuto").checked;
+  $("addBtn").disabled = true;
+  try {
+    const r = await addMovie(title, y > 1880 && y < 2100 ? y : null, night || null, auto);
+    if (r && r.already) $("addStatus").textContent = "“" + r.already + "” is already on your list.";
+    else {
+      const m = L.movies.get(r.id) || { title };
+      $("addStatus").textContent = "Added “" + m.title + "”" + (night ? " to " + shortDate(night) : " (not scheduled yet)") + "." + (r.fromCatalog ? " Details came from the movie list." : auto ? " Claude is filling in the details." : "");
+      $("addTitle").value = ""; $("addYear").value = "";
+    }
+    $("addTitle").focus();
+  } finally { $("addBtn").disabled = false; }
+});
+$("bOwnForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const title = $("bOwnTitle").value.trim(); if (!title) return;
+  const match = [...catalog.values()].find(m => m.title.toLowerCase() === title.toLowerCase());
+  if (match) B.picked.add(match.id);
+  else {
+    let id = "c-" + slugify(title), i = 2;
+    while (B.own.has(id) || catalog.has(id)) id = "c-" + slugify(title) + "-" + i++;
+    B.own.set(id, { title, year: null, mpaa: "", director: "", cast: [], synopsis: "", sub: [], free: [] });
+    B.picked.add(id);
+  }
+  $("bOwnTitle").value = ""; B.preview = null; render();
+});
+$("bRandom").addEventListener("click", () => { pickRandom(); render(); });
+$("bAll").addEventListener("click", () => { for (const m of catalog.values()) if (!B.family || !isMature(m)) B.picked.add(m.id); for (const id of B.own.keys()) B.picked.add(id); B.preview = null; render(); });
+$("bClear").addEventListener("click", () => { B.picked.clear(); B.preview = null; render(); });
+$("bBuild").addEventListener("click", () => { buildNow(); });
+$("bSearch").addEventListener("input", e => { B.q = e.target.value; renderBuilder(); });
+$("dbSearch").addEventListener("input", () => renderDb());
+document.addEventListener("input", e => { if (e.target.id === "pickSearch" && ui.night) { ui.night.q = e.target.value; renderNightSheet(); } });
+async function uploadPoster(id, file) {
+  if (!ctx.assets || !canWrite()) return;
+  if (!/^image\//.test(file.type)) { setNote("Pick an image file for the poster."); return; }
+  ui.uploading = true; renderSheet();
+  const old = (L.movies.get(id) || {}).posterId;
+  try {
+    const r = await ctx.assets.upload(file);
+    await updateMovie(id, { posterId: r.id });
+    if (old) ctx.assets.delete(old).catch(() => {});
+    setNote("Poster added to “" + titleOf(id) + "”.");
+  } catch (e) {
+    setNote(e && e.code === "too_large" ? "That image is too big. Try one under 20 MB." : e && e.code === "unsupported_type" ? "That file type can't be used as a poster." : "The poster didn't upload. Try again in a moment.");
+  } finally { ui.uploading = false; ui.editing = null; renderSheet(); }
+}
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && ui.night && ui.night.mode) { e.preventDefault(); ui.night.mode = null; renderNightSheet(); return; }
+  if (e.key === "Escape" && (ui.sheet || ui.night)) { e.preventDefault(); closeSheet(); }
+  if (e.key === "Tab" && (ui.sheet || ui.night)) {
+    const f = [...$("sheet").querySelectorAll("button, input, select, textarea, a[href], [tabindex='0']")].filter(x => !x.disabled);
+    if (!f.length) return;
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  }
+});
+
+/* ================= tabs ================= */
+function route() {
+  let view = location.hash === "#database" ? "database" : location.hash === "#build" ? "build" : "schedule";
+  for (const v of ["schedule", "database", "build"]) { $("view-" + v).hidden = v !== view; $("tab-" + v).setAttribute("aria-selected", String(v === view)); }
+  if (view === "build" && ctx.role === "guest" && P && !B.seeded) { B.seeded = true; seedBuilderFromList(); }
+  if (ui.sheet || ui.night) closeSheet();
+  render();
+}
+window.addEventListener("hashchange", route);
+
+/* ================= connect ================= */
+function mergeCatalog(docs) {
+  for (const [id, m] of docs) {
+    const base = catalog.get(id);
+    catalog.set(id, { ...(base || {}), ...m, id, tag: base ? base.tag : m.tag, mature: base ? base.mature : m.mature });
+  }
+}
+async function connect() {
+  const use = window.claude && typeof window.claude.use === "function" ? n => window.claude.use(n).catch(() => null) : () => Promise.resolve(null);
+  const [db, sample, user, assets] = await Promise.all([use("db"), use("sample"), use("user"), use("assets")]);
+  ctx.assets = assets || null;
+  ctx.db = db || null;
+  ctx.sample = typeof sample === "function" ? sample : null;
+  ctx.user = user || null;
+  let owner = false;
+  if (user) { try { owner = await user.isOwner(); } catch (_) { owner = false; } try { ctx.uid = await user.id(); } catch (_) { ctx.uid = null; } }
+  else owner = !!db; // older viewers: fall back to showing the shared list
+  const gotErr = () => setNote("The list stopped syncing. Reload the page to reconnect.");
+  if (owner && db) {
+    ctx.role = "owner"; L.kind = "owner"; L.settings = OWNER_SETTINGS;
+    db.collection("movies").limit(1000).onSnapshot(snap => {
+      const next = new Map(); snap.docs.forEach(d => { if (d.exists) next.set(d.id, d.data()); });
+      L.movies = next; L.loaded = true; mergeCatalog(next); render();
+    }, gotErr);
+    db.collection("watched").limit(1000).onSnapshot(snap => { L.watched = new Set(snap.docs.filter(d => d.exists && d.data() && d.data().watched).map(d => d.id)); render(); }, gotErr);
+    db.collection("ratings").limit(1000).onSnapshot(snap => {
+      const r = new Map(); snap.docs.forEach(d => { const v = d.exists && d.data() && Number(d.data().stars); if (v >= 0.5 && v <= 5) r.set(d.id, v); });
+      L.ratings = r; render();
+    }, gotErr);
+    db.collection("seen").limit(1000).onSnapshot(snap => { L.seen = new Set(snap.docs.filter(d => d.exists && d.data() && d.data().seen).map(d => d.id)); render(); }, gotErr);
+    route();
+    return;
+  }
+  ctx.role = "guest";
+  ctx.assets = null;
+  if (db) {
+    db.collection("movies").limit(1000).onSnapshot(snap => { const m = new Map(); snap.docs.forEach(d => { if (d.exists) m.set(d.id, d.data()); }); mergeCatalog(m); if (P) loadPersonalIntoL(); render(); }, () => {});
+  }
+  let blob = null;
+  if (db && ctx.uid) {
+    try { const snap = await db.doc("data/users/" + ctx.uid + "/countdown").get(); if (snap.exists) { blob = snap.data(); ctx.store = "account"; } } catch (_) {}
+  }
+  if (!blob) { try { const s = localStorage.getItem(LS_KEY); if (s) { blob = JSON.parse(s); ctx.store = "local"; } } catch (_) {} }
+  P = blob && blob.items && blob.settings ? blob : null;
+  loadPersonalIntoL();
+  storageNote();
+  if (!P && !location.hash) { location.hash = "#build"; return; }
+  route();
+}
+
+try { const s = localStorage.getItem("xmas-sort"); if (s) $("dbSort").value = s; } catch (_) {}
+route();
+let rz;
+if (window.ResizeObserver) new ResizeObserver(() => { clearTimeout(rz); rz = setTimeout(renderLights, 120); }).observe($("lightsWrap"));
+connect();
+</script>
+</body>
+</html>

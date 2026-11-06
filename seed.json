@@ -1,0 +1,1498 @@
+{
+ "movies": {
+  "8-bit-christmas": {
+   "cast": [
+    "Neil Patrick Harris",
+    "Winslow Fegley",
+    "Steve Zahn",
+    "June Diane Raphael"
+   ],
+   "director": "Michael Dowse",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-11-10",
+   "note": "",
+   "rt": 84,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "HBO Max"
+   ],
+   "synopsis": "A dad tells his daughter about his all-out late-1980s quest as a kid to get the hottest video game system for Christmas.",
+   "title": "8-Bit Christmas",
+   "year": 2021
+  },
+  "a-bad-moms-christmas": {
+   "cast": [
+    "Mila Kunis",
+    "Kristen Bell",
+    "Kathryn Hahn",
+    "Christine Baranski",
+    "Susan Sarandon"
+   ],
+   "director": "Jon Lucas, Scott Moore",
+   "free": [
+    "Roku Channel"
+   ],
+   "mpaa": "R",
+   "night": "2026-11-20",
+   "note": "",
+   "rt": 32,
+   "runtime": 104,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Hulu",
+    "Paramount+",
+    "Peacock",
+    "Starz"
+   ],
+   "synopsis": "Three worn-out moms vow to take back Christmas, right as their own mothers arrive for the holidays with very different plans.",
+   "title": "A Bad Moms Christmas",
+   "year": 2017
+  },
+  "a-christmas-story": {
+   "cast": [
+    "Peter Billingsley",
+    "Melinda Dillon",
+    "Darren McGavin"
+   ],
+   "director": "Bob Clark",
+   "free": [
+    "Xumo Play"
+   ],
+   "mpaa": "PG",
+   "night": "2026-12-25",
+   "note": "Christmas Day",
+   "rt": 87,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "In 1940s Indiana, nine-year-old Ralphie has exactly one Christmas wish: an official Red Ryder BB gun.",
+   "title": "A Christmas Story",
+   "year": 1983
+  },
+  "a-merry-friggin-christmas": {
+   "cast": [
+    "Joel McHale",
+    "Robin Williams",
+    "Lauren Graham",
+    "Clark Duke",
+    "Oliver Platt"
+   ],
+   "director": "Tristram Shapeero",
+   "free": [
+    "Tubi",
+    "Plex",
+    "Hoopla"
+   ],
+   "mpaa": "PG-13",
+   "night": "2026-12-08",
+   "note": "",
+   "rt": 14,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Peacock",
+    "Prime Video"
+   ],
+   "synopsis": "A man who has avoided his gruff father for years has to make an overnight road trip with him to get his son's presents home before Christmas morning.",
+   "title": "A Merry Friggin' Christmas",
+   "year": 2014
+  },
+  "all-i-want-for-christmas": {
+   "cast": [
+    "Ethan Embry",
+    "Thora Birch",
+    "Lauren Bacall",
+    "Leslie Nielsen"
+   ],
+   "director": "Robert Lieberman",
+   "free": [
+    "Kanopy",
+    "Hoopla"
+   ],
+   "mpaa": "G",
+   "night": "2026-12-05",
+   "note": "",
+   "rt": 13,
+   "runtime": 92,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "Two New York kids hatch a plan to get their divorced parents back together in time for Christmas.",
+   "title": "All I Want For Christmas",
+   "year": 1991
+  },
+  "all-is-bright": {
+   "cast": [
+    "Paul Giamatti",
+    "Paul Rudd",
+    "Sally Hawkins",
+    "Amy Landecker"
+   ],
+   "director": "Phil Morrison",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-12-06",
+   "note": "",
+   "rt": 48,
+   "runtime": 107,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video",
+    "Starz"
+   ],
+   "synopsis": "A newly paroled ex-con and his old partner, now with his ex-wife, team up to sell Christmas trees on the streets of New York.",
+   "title": "All Is Bright",
+   "year": 2013
+  },
+  "best-christmas-ever": {
+   "cast": [
+    "Heather Graham",
+    "Brandy Norwood",
+    "Jason Biggs",
+    "Matt Cedeño"
+   ],
+   "director": "Mary Lambert",
+   "free": [],
+   "mpaa": "PG",
+   "night": null,
+   "note": "",
+   "rt": 40,
+   "runtime": 80,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix"
+   ],
+   "synopsis": "A mom who suspects her old college friend's life is too perfect to be true ends up at her house for the holidays, set on finding the cracks.",
+   "title": "Best. Christmas. Ever!",
+   "year": 2023
+  },
+  "carol": {
+   "cast": [
+    "Cate Blanchett",
+    "Rooney Mara",
+    "Sarah Paulson",
+    "Kyle Chandler"
+   ],
+   "director": "Todd Haynes",
+   "free": [
+    "Tubi",
+    "Kanopy",
+    "Hoopla"
+   ],
+   "mpaa": "R",
+   "night": "2026-12-07",
+   "note": "",
+   "rt": 94,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "In 1950s New York, a young department-store clerk and an elegant older woman begin an intense relationship that starts at Christmastime.",
+   "title": "Carol",
+   "year": 2015
+  },
+  "christmas-every-day": {
+   "cast": [
+    "Erik von Detten",
+    "Robert Hays",
+    "Bess Armstrong",
+    "Yvonne Zima"
+   ],
+   "director": "Larry Peerce",
+   "free": [],
+   "mpaa": "G",
+   "night": "2026-12-18",
+   "note": "",
+   "rt": null,
+   "runtime": 96,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A self-centered teenager gets stuck reliving Christmas Day over and over after his little sister makes a wish.",
+   "title": "Christmas Every Day",
+   "year": 1996
+  },
+  "christmas-inheritance": {
+   "cast": [
+    "Eliza Taylor",
+    "Jake Lacy",
+    "Andie MacDowell"
+   ],
+   "director": "Ernie Barbarash",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-11-22",
+   "note": "",
+   "rt": 43,
+   "runtime": 104,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix"
+   ],
+   "synopsis": "A party-loving heiress is sent to her father's small hometown to deliver a Christmas letter, and has to prove she is ready to run the family business.",
+   "title": "Christmas Inheritance",
+   "year": 2017
+  },
+  "christmas-is-canceled": {
+   "cast": [
+    "Hayley Orrantia",
+    "Dermot Mulroney",
+    "Janel Parrish"
+   ],
+   "director": "Prarthana Mohan",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-12-09",
+   "note": "",
+   "rt": null,
+   "runtime": 94,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "A young woman sets out to break up her widowed dad's new relationship with her old high school rival before Christmas.",
+   "title": "Christmas Is Canceled",
+   "year": 2021
+  },
+  "christmas-with-the-campbells": {
+   "cast": [
+    "Brittany Snow",
+    "Justin Long",
+    "Alex Moffat",
+    "Julia Duffy"
+   ],
+   "director": "Clare Niederpruem",
+   "free": [],
+   "mpaa": "NR",
+   "night": "2026-11-11",
+   "note": "",
+   "rt": 41,
+   "runtime": 88,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "AMC+"
+   ],
+   "synopsis": "A raunchy send-up of holiday rom-coms: dumped right before the holidays, a young woman accepts her ex's parents' invitation to spend Christmas with them anyway, and meets his charming cousin.",
+   "title": "Christmas with the Campbells",
+   "year": 2022
+  },
+  "cup-of-cheer": {
+   "cast": [
+    "Storm Steenson",
+    "Alexander Oliver",
+    "Liam Marshall",
+    "Jacob Hogan"
+   ],
+   "director": "Jake Horowitz",
+   "free": [
+    "Tubi",
+    "Prime Video (free with ads)"
+   ],
+   "mpaa": "NR",
+   "night": "2026-11-07",
+   "note": "",
+   "rt": 67,
+   "runtime": 95,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A deadpan spoof of TV holiday romances: a journalist heads to a small town to write about Christmas cheer and falls for the owner of a hot chocolate shop facing a big corporate rival.",
+   "title": "Cup of Cheer",
+   "year": 2020
+  },
+  "daddy-s-home-2": {
+   "cast": [
+    "Will Ferrell",
+    "Mark Wahlberg",
+    "Mel Gibson",
+    "John Lithgow",
+    "John Cena"
+   ],
+   "director": "Sean Anders",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-01",
+   "note": "",
+   "rt": 20,
+   "runtime": 98,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "MGM+"
+   ],
+   "synopsis": "Two co-dads who have finally made peace see their truce tested when their own very different fathers come to town for Christmas.",
+   "title": "Daddy's Home 2",
+   "year": 2017
+  },
+  "dear-santa": {
+   "cast": [
+    "Jack Black",
+    "Robert Timothy Smith",
+    "Brianne Howey",
+    "Keegan-Michael Key"
+   ],
+   "director": "Bobby Farrelly",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-14",
+   "note": "",
+   "rt": 24,
+   "runtime": 108,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Paramount+",
+    "Prime Video"
+   ],
+   "synopsis": "Thanks to a spelling mistake, a boy's letter to Santa reaches Satan instead, and the devil shows up ready to grant his wishes.",
+   "title": "Dear Santa",
+   "year": 2024
+  },
+  "deck-the-halls": {
+   "cast": [
+    "Danny DeVito",
+    "Matthew Broderick",
+    "Kristin Davis",
+    "Kristin Chenoweth"
+   ],
+   "director": "John Whitesell",
+   "free": [
+    "Plex"
+   ],
+   "mpaa": "PG",
+   "night": "2026-11-02",
+   "note": "",
+   "rt": 6,
+   "runtime": 95,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A by-the-book optometrist's orderly Christmas falls apart when his new neighbor sets out to light up his house so brightly it can be seen from space.",
+   "title": "Deck the Halls",
+   "year": 2006
+  },
+  "diner": {
+   "cast": [
+    "Steve Guttenberg",
+    "Daniel Stern",
+    "Mickey Rourke",
+    "Kevin Bacon",
+    "Ellen Barkin"
+   ],
+   "director": "Barry Levinson",
+   "free": [],
+   "mpaa": "R",
+   "night": null,
+   "note": "",
+   "rt": 90,
+   "runtime": 110,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "Baltimore, Christmas week 1959: a group of friends in their twenties trade jokes and worries at their favorite all-night diner as one of them gets ready to marry.",
+   "title": "Diner",
+   "year": 1982
+  },
+  "dutch": {
+   "cast": [
+    "Ed O'Neill",
+    "Ethan Embry",
+    "JoBeth Williams",
+    "Christopher McDonald"
+   ],
+   "director": "Peter Faiman",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-24",
+   "note": "Thanksgiving week",
+   "rt": 17,
+   "runtime": 107,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A working-class guy offers to drive his girlfriend's snobby prep-school son home for Thanksgiving, and the road trip goes sideways almost immediately.",
+   "title": "Dutch",
+   "year": 1991
+  },
+  "eight-crazy-nights": {
+   "cast": [
+    "Adam Sandler",
+    "Jackie Titone",
+    "Austin Stout",
+    "Rob Schneider"
+   ],
+   "director": "Seth Kearsley",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-04",
+   "note": "First night of Hanukkah",
+   "rt": 13,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "An animated musical comedy: a holiday-hating troublemaker is sentenced to community service with a kindly youth basketball referee during Hanukkah.",
+   "title": "Eight Crazy Nights",
+   "year": 2002
+  },
+  "elf": {
+   "cast": [
+    "Will Ferrell",
+    "James Caan",
+    "Zooey Deschanel",
+    "Mary Steenburgen",
+    "Bob Newhart"
+   ],
+   "director": "Jon Favreau",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-12-19",
+   "note": "Last Saturday before Christmas",
+   "rt": 85,
+   "runtime": null,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "HBO Max",
+    "Prime Video"
+   ],
+   "synopsis": "A human raised by Santa's elves at the North Pole travels to New York City to find his real father.",
+   "title": "Elf",
+   "year": 2003
+  },
+  "four-christmases": {
+   "cast": [
+    "Vince Vaughn",
+    "Reese Witherspoon",
+    "Robert Duvall",
+    "Sissy Spacek",
+    "Jon Voight"
+   ],
+   "director": "Seth Gordon",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-20",
+   "note": "",
+   "rt": 25,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A couple who always skip the holidays get grounded at the airport and end up visiting all four of their divorced parents on Christmas Day.",
+   "title": "Four Christmases",
+   "year": 2008
+  },
+  "friendsgiving": {
+   "cast": [
+    "Malin Akerman",
+    "Kat Dennings",
+    "Aisha Tyler",
+    "Jane Seymour",
+    "Chelsea Peretti"
+   ],
+   "director": "Nicol Paone",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-11-25",
+   "note": "Thanksgiving Eve",
+   "rt": 19,
+   "runtime": 95,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "MovieSphere+"
+   ],
+   "synopsis": "Two best friends' low-key Thanksgiving gets crashed by exes, new flings, a glamorous mom and a long line of uninvited guests.",
+   "title": "Friendsgiving",
+   "year": 2020
+  },
+  "genie": {
+   "cast": [
+    "Melissa McCarthy",
+    "Paapa Essiedu",
+    "Denée Benton",
+    "Marc Maron"
+   ],
+   "director": "Sam Boyd",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-12-11",
+   "note": "",
+   "rt": 31,
+   "runtime": 92,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Peacock"
+   ],
+   "synopsis": "A workaholic dad who keeps letting his family down accidentally frees a centuries-old genie who is very eager to grant his Christmas wishes.",
+   "title": "Genie",
+   "year": 2023
+  },
+  "happiest-season": {
+   "cast": [
+    "Kristen Stewart",
+    "Mackenzie Davis",
+    "Alison Brie",
+    "Aubrey Plaza",
+    "Dan Levy"
+   ],
+   "director": "Clea DuVall",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-12",
+   "note": "",
+   "rt": 82,
+   "runtime": null,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Hulu"
+   ],
+   "synopsis": "A woman plans to propose to her girlfriend at her family's Christmas, then learns her girlfriend hasn't come out to her parents yet.",
+   "title": "Happiest Season",
+   "year": 2020
+  },
+  "holidate": {
+   "cast": [
+    "Emma Roberts",
+    "Luke Bracey",
+    "Kristin Chenoweth"
+   ],
+   "director": "John Whitesell",
+   "free": [],
+   "mpaa": "TV-MA",
+   "night": "2026-12-14",
+   "note": "",
+   "rt": 45,
+   "runtime": 103,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix"
+   ],
+   "synopsis": "Two singles tired of showing up alone agree to be each other's no-strings plus-one for every holiday of the year.",
+   "title": "Holidate",
+   "year": 2020
+  },
+  "home-for-the-holidays": {
+   "cast": [
+    "Holly Hunter",
+    "Robert Downey Jr.",
+    "Anne Bancroft",
+    "Charles Durning"
+   ],
+   "director": "Jodie Foster",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-26",
+   "note": "Thanksgiving Day",
+   "rt": 63,
+   "runtime": 103,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "MGM+"
+   ],
+   "synopsis": "After a rough week, a single mom flies home to Baltimore for Thanksgiving with her loving, exhausting family.",
+   "title": "Home for the Holidays",
+   "year": 1995
+  },
+  "joy-to-the-world": {
+   "cast": [
+    "Emmanuelle Chriqui",
+    "Chad Michael Murray",
+    "Ayesha Curry"
+   ],
+   "director": "Jerry Ciccoritti",
+   "free": [],
+   "mpaa": "G",
+   "night": "2026-12-13",
+   "note": "",
+   "rt": null,
+   "runtime": 87,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Hulu"
+   ],
+   "synopsis": "A lifestyle author whose brand rests on a picture-perfect home life scrambles to fake a family when a cooking show comes to film the holidays at her house.",
+   "title": "Joy to the World",
+   "year": 2025
+  },
+  "just-friends": {
+   "cast": [
+    "Ryan Reynolds",
+    "Amy Smart",
+    "Anna Faris",
+    "Chris Klein"
+   ],
+   "director": "Roger Kumble",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-02",
+   "note": "",
+   "rt": 43,
+   "runtime": 94,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "HBO Max"
+   ],
+   "synopsis": "A slick music executive gets stranded in his New Jersey hometown at Christmas and tries to win over the high school best friend who only ever saw him as a pal.",
+   "title": "Just Friends",
+   "year": 2005
+  },
+  "last-christmas": {
+   "cast": [
+    "Emilia Clarke",
+    "Henry Golding",
+    "Michelle Yeoh",
+    "Emma Thompson"
+   ],
+   "director": "Paul Feig",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-01",
+   "note": "",
+   "rt": 46,
+   "runtime": 102,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Hulu"
+   ],
+   "synopsis": "A London woman stuck in a rut, working as an elf in a year-round Christmas shop, meets a charming stranger who keeps turning up at just the right moment.",
+   "title": "Last Christmas",
+   "year": 2019
+  },
+  "last-holiday": {
+   "cast": [
+    "Queen Latifah",
+    "LL Cool J",
+    "Timothy Hutton",
+    "Gérard Depardieu"
+   ],
+   "director": "Wayne Wang",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-16",
+   "note": "",
+   "rt": 57,
+   "runtime": 112,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A shy department-store clerk gets life-changing news and cashes in everything for a lavish holiday at a grand European resort.",
+   "title": "Last Holiday",
+   "year": 2006
+  },
+  "last-train-to-christmas": {
+   "cast": [
+    "Michael Sheen",
+    "Cary Elwes",
+    "Nathalie Emmanuel",
+    "Katherine Kelly"
+   ],
+   "director": "Julian Kemp",
+   "free": [],
+   "mpaa": "NR",
+   "night": "2026-11-14",
+   "note": "",
+   "rt": 80,
+   "runtime": 90,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A 1980s nightclub owner on a Christmas Eve train finds that walking between carriages sends him to different years of his life.",
+   "title": "Last Train to Christmas",
+   "year": 2021
+  },
+  "less-than-zero": {
+   "cast": [
+    "Andrew McCarthy",
+    "Jami Gertz",
+    "Robert Downey Jr.",
+    "James Spader"
+   ],
+   "director": "Marek Kanievska",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-12-19",
+   "note": "",
+   "rt": 50,
+   "runtime": 97,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Hulu"
+   ],
+   "synopsis": "A college freshman comes home to Los Angeles for Christmas break and finds his best friend caught up in the city's darker party scene.",
+   "title": "Less Than Zero",
+   "year": 1987
+  },
+  "look-who-s-talking-now": {
+   "cast": [
+    "John Travolta",
+    "Kirstie Alley",
+    "Danny DeVito (voice)",
+    "Diane Keaton (voice)"
+   ],
+   "director": "Tom Ropelewski",
+   "free": [
+    "Tubi"
+   ],
+   "mpaa": "PG-13",
+   "night": "2026-11-07",
+   "note": "",
+   "rt": 0,
+   "runtime": 97,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "The family adds two talking dogs, a streetwise mutt and a pampered poodle, while a holiday work trip puts the parents' marriage to the test.",
+   "title": "Look Who's Talking Now!",
+   "year": 1993
+  },
+  "lost-holiday": {
+   "cast": [
+    "Kate Lyn Sheil",
+    "Thomas Matthews",
+    "Keith Poulson",
+    "William Jackson Harper"
+   ],
+   "director": "Thomas Matthews, Michael Kerry Matthews",
+   "free": [
+    "Tubi",
+    "Hoopla"
+   ],
+   "mpaa": "NR",
+   "night": "2026-12-22",
+   "note": "",
+   "rt": 46,
+   "runtime": 75,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "Home in suburban Washington, D.C. for Christmas, an adrift thirtysomething and her old friend stumble into an amateur investigation over one long, chaotic night.",
+   "title": "Lost Holiday",
+   "year": 2019
+  },
+  "love-actually": {
+   "cast": [
+    "Hugh Grant",
+    "Emma Thompson",
+    "Colin Firth",
+    "Liam Neeson",
+    "Keira Knightley",
+    "Bill Nighy"
+   ],
+   "director": "Richard Curtis",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-11-19",
+   "note": "",
+   "rt": 65,
+   "runtime": 135,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix",
+    "Starz"
+   ],
+   "synopsis": "A handful of loosely connected Londoners deal with love in all its forms in the five weeks before Christmas.",
+   "title": "Love Actually",
+   "year": 2003
+  },
+  "love-hard": {
+   "cast": [
+    "Nina Dobrev",
+    "Jimmy O. Yang",
+    "Darren Barnet"
+   ],
+   "director": "Hernán Jiménez",
+   "free": [],
+   "mpaa": "TV-MA",
+   "night": "2026-12-10",
+   "note": "",
+   "rt": 50,
+   "runtime": 104,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix"
+   ],
+   "synopsis": "An L.A. dating columnist flies across the country to surprise her dating-app crush for Christmas and finds out he is not who she thought.",
+   "title": "Love Hard",
+   "year": 2021
+  },
+  "love-the-coopers": {
+   "cast": [
+    "Diane Keaton",
+    "John Goodman",
+    "Ed Helms",
+    "Marisa Tomei",
+    "Olivia Wilde",
+    "Amanda Seyfried"
+   ],
+   "director": "Jessie Nelson",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-12-21",
+   "note": "",
+   "rt": 19,
+   "runtime": 107,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Lionsgate+"
+   ],
+   "synopsis": "Four generations of one family, each keeping a secret, head to the same chaotic Christmas Eve dinner.",
+   "title": "Love the Coopers",
+   "year": 2015
+  },
+  "mixed-nuts": {
+   "cast": [
+    "Steve Martin",
+    "Madeline Kahn",
+    "Rita Wilson",
+    "Juliette Lewis",
+    "Adam Sandler"
+   ],
+   "director": "Nora Ephron",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-21",
+   "note": "",
+   "rt": 17,
+   "runtime": null,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "On Christmas Eve, the staff of a struggling Venice Beach crisis hotline face eviction and a parade of eccentric callers and visitors.",
+   "title": "Mixed Nuts",
+   "year": 1994
+  },
+  "national-lampoon-s-christmas-vacation": {
+   "cast": [
+    "Chevy Chase",
+    "Beverly D'Angelo",
+    "Randy Quaid",
+    "Juliette Lewis",
+    "Johnny Galecki"
+   ],
+   "director": "Jeremiah S. Chechik",
+   "free": [
+    "Plex"
+   ],
+   "mpaa": "PG-13",
+   "night": "2026-12-24",
+   "note": "Christmas Eve",
+   "rt": 72,
+   "runtime": 97,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "Clark Griswold is determined to give his extended family a perfect, old-fashioned Christmas, whatever it takes.",
+   "title": "National Lampoon's Christmas Vacation",
+   "year": 1989
+  },
+  "office-christmas-party": {
+   "cast": [
+    "Jason Bateman",
+    "Olivia Munn",
+    "T.J. Miller",
+    "Jennifer Aniston",
+    "Kate McKinnon"
+   ],
+   "director": "Josh Gordon, Will Speck",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-11-18",
+   "note": "",
+   "rt": 41,
+   "runtime": 105,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Paramount+"
+   ],
+   "synopsis": "When his CEO sister threatens to shut down his branch, a laid-back manager throws an epic office holiday party to land one big client and save everyone's jobs.",
+   "title": "Office Christmas Party",
+   "year": 2016
+  },
+  "oh-what-fun": {
+   "cast": [
+    "Michelle Pfeiffer",
+    "Felicity Jones",
+    "Chloë Grace Moretz",
+    "Dominic Sessa",
+    "Denis Leary"
+   ],
+   "director": "Michael Showalter",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-29",
+   "note": "",
+   "rt": 36,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "A mom who works herself ragged making Christmas perfect gets left behind by her family and sets off on a holiday adventure of her own.",
+   "title": "Oh. What. Fun.",
+   "year": 2025
+  },
+  "one-magic-christmas": {
+   "cast": [
+    "Mary Steenburgen",
+    "Harry Dean Stanton",
+    "Gary Basaraba",
+    "Elisabeth Harnois"
+   ],
+   "director": "Phillip Borsos",
+   "free": [],
+   "mpaa": "G",
+   "night": "2026-12-03",
+   "note": "",
+   "rt": 50,
+   "runtime": 88,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Disney+"
+   ],
+   "synopsis": "A struggling mother who has lost her holiday spirit gets a visit from a Christmas angel sent to help her find it again.",
+   "title": "One Magic Christmas",
+   "year": 1985
+  },
+  "one-true-thing": {
+   "cast": [
+    "Meryl Streep",
+    "Renée Zellweger",
+    "William Hurt"
+   ],
+   "director": "Carl Franklin",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-12-15",
+   "note": "",
+   "rt": 86,
+   "runtime": 127,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A driven New York journalist moves home to care for her ill mother through the holidays and starts to see both her parents differently.",
+   "title": "One True Thing",
+   "year": 1998
+  },
+  "prancer": {
+   "cast": [
+    "Sam Elliott",
+    "Rebecca Harrell",
+    "Cloris Leachman"
+   ],
+   "director": "John D. Hancock",
+   "free": [
+    "Tubi",
+    "Plex"
+   ],
+   "mpaa": "G",
+   "night": "2026-11-16",
+   "note": "",
+   "rt": 68,
+   "runtime": 103,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "MGM+",
+    "Prime Video"
+   ],
+   "synopsis": "A farm girl finds a wounded reindeer she is sure belongs to Santa and secretly nurses it back to health.",
+   "title": "Prancer",
+   "year": 1989
+  },
+  "rise-of-the-guardians": {
+   "cast": [
+    "Chris Pine",
+    "Alec Baldwin",
+    "Hugh Jackman",
+    "Isla Fisher",
+    "Jude Law"
+   ],
+   "director": "Peter Ramsey",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-11-09",
+   "note": "",
+   "rt": 75,
+   "runtime": 95,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "An animated adventure: Jack Frost joins Santa, the Easter Bunny, the Tooth Fairy and the Sandman to protect the world's kids from the Boogeyman.",
+   "title": "Rise of the Guardians",
+   "year": 2012
+  },
+  "single-all-the-way": {
+   "cast": [
+    "Michael Urie",
+    "Philemon Chambers",
+    "Jennifer Coolidge",
+    "Kathy Najimy"
+   ],
+   "director": "Michael Mayer",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-11-28",
+   "note": "",
+   "rt": 70,
+   "runtime": 99,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix"
+   ],
+   "synopsis": "To dodge his family's questions about his love life, a man talks his best friend into posing as his boyfriend for Christmas, but his mom has already set him up.",
+   "title": "Single All the Way",
+   "year": 2021
+  },
+  "snow-day": {
+   "cast": [
+    "Mark Webber",
+    "Chris Elliott",
+    "Zena Grey",
+    "Schuyler Fisk",
+    "Chevy Chase"
+   ],
+   "director": "Chris Koch",
+   "free": [
+    "Hoopla"
+   ],
+   "mpaa": "PG",
+   "night": "2026-11-30",
+   "note": "",
+   "rt": 28,
+   "runtime": 89,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "A surprise snowstorm closes school, and a town's kids get one free day for crushes, schemes and a war against the snowplow man.",
+   "title": "Snow Day",
+   "year": 2000
+  },
+  "surviving-christmas": {
+   "cast": [
+    "Ben Affleck",
+    "James Gandolfini",
+    "Christina Applegate",
+    "Catherine O'Hara"
+   ],
+   "director": "Mike Mitchell",
+   "free": [
+    "Hoopla"
+   ],
+   "mpaa": "PG-13",
+   "night": "2026-11-23",
+   "note": "",
+   "rt": 8,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A lonely rich executive pays a family a small fortune to let him spend Christmas at their house and act as his own family.",
+   "title": "Surviving Christmas",
+   "year": 2004
+  },
+  "the-apartment": {
+   "cast": [
+    "Jack Lemmon",
+    "Shirley MacLaine",
+    "Fred MacMurray"
+   ],
+   "director": "Billy Wilder",
+   "free": [
+    "Tubi",
+    "Plex",
+    "Kanopy",
+    "Hoopla"
+   ],
+   "mpaa": "NR",
+   "night": "2026-11-08",
+   "note": "",
+   "rt": 94,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "An ambitious insurance clerk lends out his apartment to company executives, and falls for the elevator operator caught up in one of their affairs.",
+   "title": "The Apartment",
+   "year": 1960
+  },
+  "the-baltimorons": {
+   "cast": [
+    "Michael Strassner",
+    "Liz Larsen",
+    "Olivia Luccardi"
+   ],
+   "director": "Jay Duplass",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-11-15",
+   "note": "",
+   "rt": 93,
+   "runtime": 99,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "AMC+",
+    "Sundance Now"
+   ],
+   "synopsis": "On Christmas Eve, a newly sober former improv comic with a dental emergency spends the day roaming Baltimore with the older dentist who treats him.",
+   "title": "The Baltimorons",
+   "year": 2025
+  },
+  "the-best-christmas-pageant-ever": {
+   "cast": [
+    "Judy Greer",
+    "Pete Holmes",
+    "Lauren Graham",
+    "Molly Belle Wright"
+   ],
+   "director": "Dallas Jenkins",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-11-17",
+   "note": "",
+   "rt": 92,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Peacock",
+    "Starz"
+   ],
+   "synopsis": "A mom reluctantly takes over her church's Christmas pageant, and the town's most notorious kids grab every lead role.",
+   "title": "The Best Christmas Pageant Ever",
+   "year": 2024
+  },
+  "the-christmas-classic": {
+   "cast": [
+    "Malin Akerman",
+    "Amy Smart",
+    "Ryan Hansen",
+    "Chris Mullinax"
+   ],
+   "director": "Shane Dax Taylor",
+   "free": [
+    "Tubi"
+   ],
+   "mpaa": "NR",
+   "night": "2026-11-28",
+   "note": "",
+   "rt": null,
+   "runtime": 86,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "A woman goes home to New Mexico for the holidays with orders to convince her ex to sell his ski resort to her boss.",
+   "title": "The Christmas Classic",
+   "year": 2023
+  },
+  "the-family-man": {
+   "cast": [
+    "Nicolas Cage",
+    "Téa Leoni",
+    "Don Cheadle",
+    "Jeremy Piven"
+   ],
+   "director": "Brett Ratner",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-12",
+   "note": "",
+   "rt": 54,
+   "runtime": 125,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Hulu",
+    "Peacock"
+   ],
+   "synopsis": "A wealthy, single Wall Street dealmaker wakes up on Christmas morning inside the suburban family life he might have had if he had made a different choice.",
+   "title": "The Family Man",
+   "year": 2000
+  },
+  "the-family-stone": {
+   "cast": [
+    "Sarah Jessica Parker",
+    "Diane Keaton",
+    "Rachel McAdams",
+    "Dermot Mulroney",
+    "Luke Wilson"
+   ],
+   "director": "Thomas Bezucha",
+   "free": [
+    "Pluto TV"
+   ],
+   "mpaa": "PG-13",
+   "night": "2026-11-13",
+   "note": "",
+   "rt": 52,
+   "runtime": 104,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "An uptight businesswoman meets her boyfriend's free-spirited, tight-knit family over Christmas, and they do not exactly warm to her.",
+   "title": "The Family Stone",
+   "year": 2005
+  },
+  "the-fitzgerald-family-christmas": {
+   "cast": [
+    "Edward Burns",
+    "Connie Britton",
+    "Kerry Bishé",
+    "Ed Lauter"
+   ],
+   "director": "Edward Burns",
+   "free": [],
+   "mpaa": "PG-13",
+   "night": "2026-11-06",
+   "note": "",
+   "rt": 65,
+   "runtime": 102,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "MGM+",
+    "Paramount+"
+   ],
+   "synopsis": "Seven grown siblings have to decide whether to let their long-absent father come home for Christmas.",
+   "title": "The Fitzgerald Family Christmas",
+   "year": 2012
+  },
+  "the-holdovers": {
+   "cast": [
+    "Paul Giamatti",
+    "Da'Vine Joy Randolph",
+    "Dominic Sessa"
+   ],
+   "director": "Alexander Payne",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-11-21",
+   "note": "",
+   "rt": 97,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Peacock"
+   ],
+   "synopsis": "Over Christmas break in 1970, a cranky boarding-school teacher is stuck minding a troublemaking student with nowhere to go, alongside the school's head cook.",
+   "title": "The Holdovers",
+   "year": 2023
+  },
+  "the-ice-harvest": {
+   "cast": [
+    "John Cusack",
+    "Billy Bob Thornton",
+    "Connie Nielsen",
+    "Oliver Platt",
+    "Randy Quaid"
+   ],
+   "director": "Harold Ramis",
+   "free": [],
+   "mpaa": "R",
+   "night": "2026-12-05",
+   "note": "",
+   "rt": 47,
+   "runtime": 88,
+   "slot": 1,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "On an icy Christmas Eve in Wichita, a mob lawyer and his partner try to skip town with stolen money, and nothing goes to plan.",
+   "title": "The Ice Harvest",
+   "year": 2005
+  },
+  "the-last-christmas-party": {
+   "cast": [
+    "Anna Clare Kerr",
+    "James Williams",
+    "Samantha Brooks",
+    "Lainey Woo"
+   ],
+   "director": "Julian Carlo Santos",
+   "free": [
+    "Tubi",
+    "Roku Channel",
+    "Plex"
+   ],
+   "mpaa": "PG-13",
+   "night": "2026-12-23",
+   "note": "",
+   "rt": null,
+   "runtime": 84,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Prime Video"
+   ],
+   "synopsis": "Three college couples spend one last night of holiday parties before everyone heads home for winter break.",
+   "title": "The Last Christmas Party",
+   "year": 2020
+  },
+  "the-night-before": {
+   "cast": [
+    "Seth Rogen",
+    "Joseph Gordon-Levitt",
+    "Anthony Mackie",
+    "Lizzy Caplan"
+   ],
+   "director": "Jonathan Levine",
+   "free": [
+    "Xumo Play"
+   ],
+   "mpaa": "R",
+   "night": "2026-11-04",
+   "note": "",
+   "rt": 68,
+   "runtime": 101,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [
+    "Netflix"
+   ],
+   "synopsis": "Three lifelong friends spend one last Christmas Eve together in New York, chasing the legendary party they have hunted for years.",
+   "title": "The Night Before",
+   "year": 2015
+  },
+  "the-ref": {
+   "cast": [
+    "Denis Leary",
+    "Judy Davis",
+    "Kevin Spacey"
+   ],
+   "director": "Ted Demme",
+   "free": [
+    "Hoopla"
+   ],
+   "mpaa": "R",
+   "night": "2026-12-17",
+   "note": "",
+   "rt": 73,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A cat burglar on the run on Christmas Eve takes a bickering married couple hostage and quickly regrets it.",
+   "title": "The Ref",
+   "year": 1994
+  },
+  "unaccompanied-minors": {
+   "cast": [
+    "Dyllan Christopher",
+    "Lewis Black",
+    "Wilmer Valderrama",
+    "Tyler James Williams"
+   ],
+   "director": "Paul Feig",
+   "free": [],
+   "mpaa": "PG",
+   "night": "2026-12-12",
+   "note": "",
+   "rt": 29,
+   "runtime": null,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "A group of kids flying alone get stuck at a snowed-in airport on Christmas Eve and decide not to stay put.",
+   "title": "Unaccompanied Minors",
+   "year": 2006
+  },
+  "what-happens-later": {
+   "cast": [
+    "Meg Ryan",
+    "David Duchovny"
+   ],
+   "director": "Meg Ryan",
+   "free": [
+    "Plex",
+    "Kanopy"
+   ],
+   "mpaa": "R",
+   "night": "2026-11-27",
+   "note": "",
+   "rt": 51,
+   "runtime": 103,
+   "slot": 0,
+   "streamCheckedOn": "2026-11-02",
+   "sub": [],
+   "synopsis": "Two former lovers end up snowed in together overnight at a small regional airport.",
+   "title": "What Happens Later",
+   "year": 2023
+  }
+ },
+ "watched": {
+  "deck-the-halls": {
+   "checkedOn": "2026-11-03",
+   "title": "Deck the Halls",
+   "watched": true
+  },
+  "last-christmas": {
+   "checkedOn": "2026-11-02",
+   "title": "Last Christmas",
+   "watched": true
+  }
+ },
+ "ratings": {
+  "deck-the-halls": {
+   "ratedOn": "2026-11-03",
+   "stars": 3,
+   "title": "Deck the Halls"
+  },
+  "last-christmas": {
+   "ratedOn": "2026-11-02",
+   "stars": 3,
+   "title": "Last Christmas"
+  },
+  "the-night-before": {
+   "ratedOn": "2026-11-06",
+   "stars": 3,
+   "title": "The Night Before"
+  }
+ },
+ "seen": {
+  "deck-the-halls": {
+   "seen": true,
+   "title": "Deck the Halls"
+  },
+  "the-night-before": {
+   "seen": true,
+   "title": "The Night Before"
+  }
+ }
+}
